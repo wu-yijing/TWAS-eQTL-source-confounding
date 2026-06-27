@@ -72,8 +72,9 @@ eqtlgen['Group'] = eqtlgen['Gene'].map(gene_group)
 # 统计每个分组-表型组合的 FDR 显著率
 results_summary = []
 for trait in eqtlgen['Trait'].unique():
-    for group_name in ['30_HOTAIR_Candidate', '39_NonCandidate_HOTAIR', '30_T2DM_Control']:
-        subset = eqtlgen[(eqtlgen['Trait'] == trait) & (eqtlgen['Group'] == group_name)].copy()
+    for group_name in ['Candidate', 'NonCandidate', 'T2DM']:
+        # 使用 contains 兼容各种标签格式
+        subset = eqtlgen[(eqtlgen['Trait'] == trait) & (eqtlgen['Group'].str.contains(group_name, case=False, na=False))].copy()
         n_total = len(subset)
         if n_total == 0:
             continue
@@ -102,8 +103,8 @@ print(f"  修正后分组分布: {gtex_per['Corrected_Group'].value_counts().to_
 
 gtex_enrich_list = []
 for trait in gtex_per['Trait'].unique():
-    for group_name in ['30_HOTAIR_Candidate', '39_NonCandidate_HOTAIR', '30_T2DM_Control']:
-        subset = gtex_per[(gtex_per['Trait'] == trait) & (gtex_per['Corrected_Group'] == group_name)].copy()
+    for group_name in ['Candidate', 'NonCandidate', 'T2DM']:
+        subset = gtex_per[(gtex_per['Trait'] == trait) & (gtex_per['Corrected_Group'].str.contains(group_name, case=False, na=False))].copy()
         n_total = len(subset)
         if n_total == 0:
             continue
@@ -123,9 +124,9 @@ print(gtex_enrich.to_string(index=False))
 # 2c. 富集率对比表 — 统一分组名
 print("\n  eQTLGen vs GTEx 富集率对比:")
 group_map_gtex = {
-    '30_HOTAIR_Candidate': '30_HOTAIR_Candidate',
-    '39_NonCandidate_HOTAIR': '39_NonCandidate_HOTAIR',
-    '30_T2DM_Control': '30_T2DM_Control'
+    'Candidate': 'Candidate',
+    'NonCandidate': 'NonCandidate',
+    'T2DM': 'T2DM'
 }
 eqtl_enrich_mapped = eqtl_enrich.copy()
 eqtl_enrich_mapped['Group_Merge'] = eqtl_enrich_mapped['Group']
@@ -172,14 +173,14 @@ eqtlgen_z = eqtlgen.set_index(['Gene', 'Trait'])['Z_eQTLGen'].to_dict()
 # 分析匹配对的TWAS信号
 pair_results = []
 group_name_map = {
-    'Candidate': '30_HOTAIR_Candidate',
-    'NonCandidate': '39_NonCandidate_HOTAIR',
-    'T2DM': '30_T2DM_Control'
+    'Candidate': 'Candidate',
+    'NonCandidate': 'NonCandidate',
+    'T2DM': 'T2DM'
 }
 rev_group = {v: k for k, v in group_name_map.items()}
 
 # 从协变量表获取候选=1/对照=0的标记
-covar['is_candidate'] = (covar['Group'] == '30_HOTAIR_Candidate').astype(int)
+covar['is_candidate'] = (covar['Group'].str.contains('Candidate', case=False, na=False)).astype(int)
 
 if 'treated' in matches.columns:
     for _, pair in matches.iterrows():
@@ -304,7 +305,7 @@ print("6. Pull-down vs 文献分层分析")
 print("=" * 60)
 
 # 从协变量表提取候选基因来源
-cand_covar = covar[covar['Group'] == '30_HOTAIR_Candidate'][['Gene', 'Source', 'PullDown_Unused', 'PullDown_Peptides95']]
+cand_covar = covar[covar['Group'].str.contains('Candidate', case=False, na=False)][['Gene', 'Source', 'PullDown_Unused', 'PullDown_Peptides95']]
 print("\n  候选基因来源分布:")
 print(cand_covar['Source'].value_counts())
 

@@ -6,7 +6,7 @@
 
 This repository contains analysis scripts and processed data for:
 
-**"eQTL source confounding systematically biases TWAS cross-population replication: a quantitative evaluation in HOTAIR binding proteins across 60 genes and three diabetic complications"**
+**"eQTL source confounding systematically biases TWAS cross-population replication: a quantitative evaluation in HOTAIR binding proteins across 104 genes and three diabetic complications"**
 
 Target journal: **GigaScience**
 
@@ -18,6 +18,7 @@ Does the choice of eQTL weight source (GTEx v8 tissue-specific vs. eQTLGen large
 
 | Metric | Value |
 |--------|-------|
+| Total genes analyzed | 104 (30 candidate + 44 non-candidate + 30 T2DM control) |
 | Spearman ρ (GTEx vs eQTLGen Z-scores) | 0.289 |
 | Direction consistency (all pairs) | 59.5% |
 | Direction consistency (candidate genes only) | 37.5% |

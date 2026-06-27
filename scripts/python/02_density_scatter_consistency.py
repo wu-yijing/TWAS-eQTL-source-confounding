@@ -27,7 +27,7 @@ eqtlgen = pd.read_csv(os.path.join(RE_DESIGN, r"3.富集分析基础数据不完
 # ====== Fig 1: Love Plot (简化版) ======
 print("  Fig 1: Love Plot...")
 # 匹配前的候选基因
-cand_genes = covar[covar['Group'] == '30_HOTAIR_Candidate']
+cand_genes = covar[covar['Group'].str.contains('Candidate', case=False)]
 # 匹配后的对照基因
 ctrl_genes = set(matches[matches['treated'] == 0]['Gene'])
 ctrl_covar = covar[covar['Gene'].isin(ctrl_genes)]
@@ -102,18 +102,18 @@ eqtlgen['Abs_Z'] = eqtlgen['Z_eQTLGen'].abs()
 
 fig, axes = plt.subplots(1, 3, figsize=(18, 5))
 group_colors = {
-    '30_HOTAIR_Candidate': '#E74C3C',
-    '39_NonCandidate_HOTAIR': '#3498DB',
-    '30_T2DM_Control': '#2ECC71'
+    'Candidate': '#E74C3C',
+    'NonCandidate': '#3498DB',
+    'T2DM_Control': '#2ECC71'
 }
 group_labels = {
-    '30_HOTAIR_Candidate': '30 HOTAIR Candidates',
-    '39_NonCandidate_HOTAIR': '39 Non-Candidates',
-    '30_T2DM_Control': '30 T2DM Controls'
+    'Candidate': 'Candidates',
+    'NonCandidate': 'Non-Candidates',
+    'T2DM_Control': 'T2DM Controls'
 }
 
 for i, (ax, trait) in enumerate(zip(axes, ['DR', 'DN', 'DPN'])):
-    for grp in ['30_HOTAIR_Candidate', '39_NonCandidate_HOTAIR', '30_T2DM_Control']:
+    for grp in ['Candidate', 'NonCandidate', 'T2DM_Control']:
         sub = eqtlgen[(eqtlgen['Trait'] == trait) & (eqtlgen['Group'] == grp)]['Abs_Z'].dropna().values
         if len(sub) < 2:
             continue
@@ -143,9 +143,9 @@ print("  Fig 3: Scatter Plot...")
 fig, axes = plt.subplots(1, 3, figsize=(18, 6))
 
 scatter_colors = {
-    '30_HOTAIR_Candidate': '#E74C3C',
-    '39_NonCandidate_HOTAIR': '#3498DB',
-    '30_T2DM_Control': '#2ECC71'
+    'Candidate': '#E74C3C',
+    'NonCandidate': '#3498DB',
+    'T2DM_Control': '#2ECC71'
 }
 marker_map = {True: 'o', False: 'x'}
 alpha_map = {True: 0.6, False: 0.9}
@@ -188,9 +188,9 @@ print("  → 已保存: Fig3_Scatter_Plot.png")
 print("  Fig 4: Direction Consistency...")
 fig, ax = plt.subplots(figsize=(10, 6))
 
-group_labels_short = {'30_HOTAIR_Candidate': 'Candidates', '39_NonCandidate_HOTAIR': 'Non-Candidates', '30_T2DM_Control': 'T2DM Controls'}
+group_labels_short = {'Candidate': 'Candidates', 'NonCandidate': 'Non-Candidates', 'T2DM_Control': 'T2DM Controls'}
 bar_data = []
-for grp in ['30_HOTAIR_Candidate', '39_NonCandidate_HOTAIR', '30_T2DM_Control']:
+for grp in ['Candidate', 'NonCandidate', 'T2DM_Control']:
     sub = comp[comp['Group'] == grp]
     if len(sub) == 0:
         continue

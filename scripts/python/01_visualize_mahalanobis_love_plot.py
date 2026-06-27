@@ -36,9 +36,9 @@ ctrl_match = matches[matches['treated'] == 0].copy()
 fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
 # 匹配前: 从协变量表中提取
-covar_cand = covar[covar['Group'] == '30_HOTAIR_Candidate']
-covar_non = covar[covar['Group'] == '39_NonCandidate_HOTAIR']
-covar_t2dm = covar[covar['Group'] == '30_T2DM_Control']
+covar_cand = covar[covar['Group'].str.contains('Candidate', case=False)]
+covar_non = covar[covar['Group'].str.contains('NonCandidate', case=False)]
+covar_t2dm = covar[covar['Group'].str.contains('T2DM', case=False)]
 
 # 只取匹配的候选和对应的对照
 cand_genes = set(cand_match['Gene'])
@@ -131,18 +131,18 @@ eqtlgen['Abs_Z'] = eqtlgen['Z_eQTLGen'].abs()
 fig, axes = plt.subplots(1, 3, figsize=(18, 5))
 
 group_colors = {
-    '30_HOTAIR_Candidate': '#E74C3C',
-    '39_NonCandidate_HOTAIR': '#3498DB',
-    '30_T2DM_Control': '#2ECC71'
+    'Candidate': '#E74C3C',
+    'NonCandidate': '#3498DB',
+    'T2DM_Control': '#2ECC71'
 }
 group_labels = {
-    '30_HOTAIR_Candidate': '30 HOTAIR Candidates',
-    '39_NonCandidate_HOTAIR': '39 Non-Candidates',
-    '30_T2DM_Control': '30 T2DM Controls'
+    'Candidate': 'Candidates',
+    'NonCandidate': 'Non-Candidates',
+    'T2DM_Control': 'T2DM Controls'
 }
 
 for i, (ax, trait) in enumerate(zip(axes, ['DR', 'DN', 'DPN'])):
-    for grp in ['30_HOTAIR_Candidate', '39_NonCandidate_HOTAIR', '30_T2DM_Control']:
+    for grp in ['Candidate', 'NonCandidate', 'T2DM_Control']:
         sub = eqtlgen[(eqtlgen['Trait'] == trait) & (eqtlgen['Group'] == grp)]['Abs_Z'].dropna()
         if len(sub) < 2:
             continue
@@ -174,9 +174,9 @@ print("  Fig 3: Scatter plot...")
 fig, axes = plt.subplots(1, 3, figsize=(18, 6))
 
 scatter_colors = {
-    '30_HOTAIR_Candidate': '#E74C3C',
-    '39_NonCandidate_HOTAIR': '#3498DB',
-    '30_T2DM_Control': '#2ECC71'
+    'Candidate': '#E74C3C',
+    'NonCandidate': '#3498DB',
+    'T2DM_Control': '#2ECC71'
 }
 
 for i, (ax, trait) in enumerate(zip(axes, ['DR', 'DN', 'DPN'])):
@@ -219,7 +219,7 @@ print("  Fig 4: Direction consistency bar chart...")
 fig, ax = plt.subplots(figsize=(10, 6))
 
 # 按组计算方向一致性
-groups_ordered = ['30_HOTAIR_Candidate', '39_NonCandidate_HOTAIR', '30_T2DM_Control']
+groups_ordered = ['Candidate', 'NonCandidate', 'T2DM_Control']
 bar_data = []
 for grp in groups_ordered:
     sub = comp[comp['Group'] == grp]

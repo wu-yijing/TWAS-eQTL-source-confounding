@@ -27,7 +27,8 @@
 ### 段落3: 本研究的核心问题与设计
 - 核心科学问题：**eQTL 权重来源的选择在多大程度上影响 TWAS 跨人群复制的结论？**
 - 研究设计：以 HOTAIR 为模型系统，系统比较 GTEx v8（组织特异性 MASHR, N≈600）与 eQTLGen（全血, N=31,684）两种权重来源
-- 分析框架：60 个基因（30 候选 + 39 非候选 + 30 T2DM 对照，有重叠）× 2 种 eQTL 权重 × 3 个表型（DR/DN/DPN）
+- 分析框架：104 个基因（30 候选 + 44 非候选 + 30 T2DM 对照，有重叠）× 2 种 eQTL 权重 × 3 个表型（DR/DN/DPN）
+  - 非候选组原始 54 个样本特异性蛋白，经 Unused≥2.0 置信度过滤后保留 44 个高置信度基因
 - 关键评估指标：方向一致性、Spearman 相关性、富集率变化、协变量匹配后富集稳定性
 
 ### 段落4: 主要发现预览
@@ -60,39 +61,48 @@
 - eQTLGen: 使用 eQTLGen Z-score 元分析权重
 - 多重检验校正：FDR (BH, q<0.05), Bonferroni, 每个分析域分别校正
 
-### 2.4 两组内部对照 + 第三组 T2DM 对照
+### 2.4 非候选蛋白置信度过滤（方法学改进）
+
+这是方案2引入的关键改进之一：
+
+- **输入**：54 个非候选蛋白（原始 Covariate Matrix 标注为 `39_NonCandidate_HOTAIR`，但实际含 54 个基因——该标签为历史命名遗留问题）
+- **标准**：Unused 评分 ≥ 2.0（蛋白鉴定置信度阈值，替代无区分力的 Peptides95≥1 标准）
+- **输出**：44 个高置信度非候选蛋白，排除 10 个低置信度蛋白（RPS10P5, RPL7A, SERPINH1, RPL17, H2AJ, RPL13, TPM4, TUBB4B, VAT1, H3-7）
+- 该过滤确保了 Mahalanobis 匹配的对照基因质量，排除了可能因鉴定不可靠而引入噪声的低置信度蛋白
+
+### 2.5 两组内部对照 + 第三组 T2DM 对照
 - 候选组：30 HOTAIR RNA pull-down 蛋白（Unused≥2.0 + CRAPome 过滤）
-- 非候选组：39 样本特异性蛋白且未被选为候选，Unused≥2.0
+- 非候选组：44 高置信度非候选蛋白（原始 54 经 Unused≥2.0 过滤后保留，排除 10 个低置信度蛋白）
 - T2DM 对照组：30 已发表 T2DM GWAS 关联基因
 - 分组详细依据（Supplementary Table S1）
 
-### 2.5 方向一致性与 Spearman 相关性分析
+### 2.6 方向一致性与 Spearman 相关性分析
 - 逐基因-表型配对比较 GTEx Z 值与 eQTLGen Z 值的符号一致性
 - 整体 Spearman 秩相关 ρ（合并三表型）
 - 分组分表型报告方向一致率 + 二项符号检验
 
-### 2.6 富集分析
+### 2.7 富集分析
 - FDR 显著率 = (组内 FDR 显著基因数) / (组内可测试基因数)
 - 富集比较：Fisher 精确检验（候选 vs 非候选 / 候选 vs T2DM）
 - 分三层：GTEx baseline → eQTLGen → Mahalanobis 匹配后
 
-### 2.7 Mahalanobis 协变量匹配（方法学核心）
+### 2.8 Mahalanobis 协变量匹配（方法学核心）
 - 目标：为 30 个候选基因从全基因组基因池中匹配协变量相近的对照
 - 匹配维度：log10(基因长度) + GC% + eQTL SNP 数
 - 方法：matchit R 包，nearest neighbor, Mahalanobis 距离, ratio=1
 - 平衡诊断：SMD 比较（Love plot, Supplementary Figure S2）
 - 匹配后：在匹配配对集上重复富集分析
 
-### 2.8 Pull-down 来源分层分析
+### 2.9 Pull-down 来源分层分析
 - 将 30 候选基因分为两组：RNA pull-down 实验来源 vs 文献/数据库来源
 - 分别计算两组的 eQTLGen 方向一致性和 Z 值分布
 
-### 2.9 跨人群复制与异质性评估
+### 2.10 跨人群复制与异质性评估
 - UK Biobank 两独立 DR GWAS 复制
 - 补充外部验证：Cai et al. 2026 UKB T2D-DR, Sakaue et al. 2021 DN
 - Cochran's Q, I², 95% 预测区间
 
-### 2.10 统计软件与可用性
+### 2.11 统计软件与可用性
 - 所有分析均使用 Python 3.13 + R 4.5.2
 - 关键包：S-PrediXcan (v1.0), matchit R, scipy, statsmodels, scikit-learn
 - 完整代码已公开在 GitHub: [URL]
