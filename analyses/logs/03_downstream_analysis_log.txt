@@ -14,42 +14,55 @@ Script:       03_enrichment_analysis.py
 
 Inputs loaded:
   - covariate_matrix.csv (covar): 104 genes × 20+ columns
-  - GTEx multi-tissue integrated results (from car dia 投稿资料/)
-  - GTEx per-tissue results
-  - eQTLGen S-PrediXcan results (eqtlgen_spredixcan_results.csv)
-  - eQTLGen vs GTEx comparison (eqtlgen_vs_gtex_comparison.csv)
-  - Background gene Z-scores (full TWAS output for Mahalanobis pool selection)
+  - GTEx multi-tissue integrated results from:
+    E:/workbuddy/car dia 投稿资料/4.TWAS跑对照/R13_TWAS_Extension_integrated.csv
+    (81 rows, Stouffer integrated Z-scores across Nerve_Tibial + Whole_Blood)
+  - GTEx per-tissue results from:
+    E:/workbuddy/car dia 投稿资料/4.TWAS跑对照/R13_TWAS_Extension_per_tissue.csv
+    (302 rows, tissue-specific Z-scores)
+  - eQTLGen S-PrediXcan results:
+    ca. 99 rows from re设计方案/3.富集分析基础数据不完整 + 协变量不匹配/
+    eqtlgen_spredixcan_results.csv
+  - eQTLGen vs GTEx comparison:
+    re设计方案/3.富集分析基础数据不完整 + 协变量不匹配/
+    eqtlgen_vs_gtex_comparison.csv (90+ gene-phenotype pairs)
+  - Background gene Z-scores (from GTEx whole-WAS output for Mahalanobis pool)
 
 Group composition (from covariate_matrix.csv):
-  - Candidate genes: 30 (15 pull-down + 15 literature)
-  - Non-candidate genes: 44 (after Unused>=2.0 filter, from 54 original)
-  - T2DM control genes: 30 (from published T2DM GWAS)
-  - Background pool: full GTEx/eQTLGen TWAS output for matching
-
-Non-candidate filtering note:
-  - Original: 54 non-candidate proteins (labeled "39_NonCandidate_HOTAIR")
-  - Filter applied: Unused >= 2.0 (protein identification confidence)
-  - Excluded (10): RPS10P5, RPL7A, SERPINH1, RPL17, H2AJ, RPL13, TPM4,
+  - Candidate genes: 30 (15 pull-down + 15 literature curation)
+  - Non-candidate genes: 44 (After Unused>=2.0 filter, from 54 original)
+    Excluded (10): RPS10P5, RPL7A, SERPINH1, RPL17, H2AJ, RPL13, TPM4,
                    TUBB4B, VAT1, H3-7
-  - Retained: 44 high-confidence non-candidate genes
+  - T2DM control genes: 30 (from published T2DM GWAS associations)
+  - Background pool: full GTEx/eQTLGen TWAS output for matching
 
 ========================================================================
 STEP 2: DIRECTION CONSISTENCY ANALYSIS
 ========================================================================
-Script:       04_generate_all_figures.py (fig2_scatter_plots)
-Date:         2026-06-28
+Data file:    eqtlgen_vs_gtex_comparison.csv (90+ gene-phenotype pairs)
+Scripts:      visualize_plan2.py, visualize_plan2_v2.py
+              (from 余下方案2执行结果/)
+Date:         2026-06-27
 
 Method:
-  sign(GTEx_Z) == sign(eQTLGen_Z) for each gene-phenotype pair
+  sign(Z_eQTLGen) == sign(Z_GTEx_Multi) for each gene-phenotype pair
   Binomial test: H0: p=0.5 (random direction)
 
-Results:
-  - All pairs: 59.5% direction consistency (P=... from binomial test)
-  - Candidate (19 analyzable): 37.5%
-  - Non-candidate: ...
-  - T2DM control: ...
+Actual data sample from comparison CSV (DR trait):
+  Gene               Z_eQTLGen  Z_GTEx   Same_Direction
+  RPS8               +26.54     +2.05    True
+  ST6GAL1            +1.21      -0.45    False (inverted)
+  ANXA1              -1.73      +0.89    False (inverted)
+  HHEX               -6.68      +0.63    False (inverted)
+  PUF60              -0.36      +1.19    False (inverted)
+  RPL27A             -3.11      +0.25    False (inverted)
+  CCT3               -6.32      -0.62    True
+  RPN1               -7.59      -0.83    True
 
-Figure: Fig2_Scatter_Plot (scatter plot with direction color-coding)
+Visual outputs:
+  - Fig2_Scatter_Plot (GTEx vs eQTLGen Z-scores, 3 phenotypes)
+  - Fig4_Direction_Consistency (bar chart by group)
+  - Script: visualize_plan2_v2.py (output dir: 2026-06-27-15-13-34)
 
 ========================================================================
 STEP 3: SPEARMAN CORRELATION
