@@ -28,7 +28,74 @@ Does the choice of eQTL weight source (GTEx v8 tissue-specific vs. eQTLGen large
 | RNH1 eQTLGen Z-score | +1.18 (P=0.237) |
 | Cross-population I² (RNH1, 3 cohorts) | 95.0% |
 
+## Quick Start (Docker — Recommended)
+
+```bash
+# 1. Build the Docker image
+docker build -t twas-eqtl-repro .
+
+# 2. Run the full reproducibility pipeline
+docker run --rm -v $(pwd)/output:/app/output twas-eqtl-repro
+
+# 3. View outputs
+open output/figs/    # All figures in PDF + PNG
+open output/logs/    # Analysis provenance logs
+```
+
+### What the Docker image contains
+- **Python 3.13 + R 4.5.2** with all dependencies (pandas, scipy, statsmodels, MatchIt, etc.)
+- **MetaXcan** (for S-PrediXcan, run separately with `run_spredixcan.sh`)
+- **Downstream analysis scripts** that generate all paper figures
+- **Processed data** needed to reproduce figures from intermediate results
+
+## Local Setup (Conda)
+
+```bash
+# With your local conda installation:
+conda env create -f environment.yml
+conda activate twas-eqtl
+
+# Run downstream analysis
+python scripts/python/04_generate_all_figures.py
+```
+
+## Reproducing the Full Pipeline (Optional)
+
+To reproduce from raw GWAS data (requires large input files):
+
+```bash
+# Mount external data and run S-PrediXcan
+docker run --rm \
+  -v /path/to/finngen_data:/input/finngen \
+  -v /path/to/gtex_models:/input/gtex \
+  -v /path/to/eqtlgen_weights:/input/eqtlgen \
+  -v /path/to/1000g_ref:/input/1000g \
+  -v $(pwd)/output:/app/output \
+  twas-eqtl-repro \
+  bash /app/run_spredixcan.sh
+```
+
 ## Repository Structure
+
+```
+├── Dockerfile                     # Container definition
+├── environment.yml                # Conda environment (pinned)
+├── requirements.txt               # pip dependencies
+├── renv.lock                      # R environment lock
+├── run_all.sh                     # Main entry point (Docker CMD)
+├── run_spredixcan.sh              # S-PrediXcan execution reference
+├── .dockerignore                  # Docker build exclusions
+├── data/
+│   ├── raw/                       # (empty — raw data too large for repo)
+│   └── processed/                 # Intermediate results (CSV)
+├── scripts/
+│   ├── python/                    # Python analysis scripts
+│   └── R/                         # R scripts (Mahalanobis matching)
+├── figs/                          # Generated figures
+├── docs/                          # Documentation
+├── gigadb_submission/             # GigaDB submission files
+└── analyses/logs/                 # Provenance logs + SHA256 checksums
+```
 
 ```
 TWAS-eQTL-source-confounding/

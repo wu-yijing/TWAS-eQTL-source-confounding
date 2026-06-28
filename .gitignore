@@ -35,3 +35,7 @@ figs/*.svg
 # Misc
 *.log
 *.tmp
+
+# Docker (keep Dockerfile, ignore intermediate build artifacts)
+.dockerignore
+docker-compose*.yml
