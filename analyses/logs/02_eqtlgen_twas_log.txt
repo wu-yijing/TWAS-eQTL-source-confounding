@@ -1,0 +1,98 @@
+========================================================================
+S-PrediXcan RUN LOG: eQTLGen TWAS
+========================================================================
+Run Date:    2026-06 (after plan2 workflow inception)
+Tissue:      Whole Blood (eQTLGen meta-analysis)
+Model:       Z-score meta-analysis (single variant)
+Sample size: N=31,684
+
+========================================================================
+RUN 1: eQTLGen Whole_Blood — DR (FinnGen R13)
+========================================================================
+Date:         2026-06-10 (approximate)
+Command:
+  python SPrediXcan.py \
+    --model_db_path eQTLGen_Whole_Blood.db \
+    --covariance 1000G_EUR_covariance.txt.gz \
+    --gwas_file FinnGen_R13_DR.sumstats.gz \
+    --snp_column rsid \
+    --effect_allele_column alt \
+    --non_effect_allele_column ref \
+    --beta_column beta \
+    --se_column se \
+    --pvalue_column pval \
+    --output_file results/eqtlgen_Whole_Blood_DR.csv \
+    --additional_output
+
+Input files:
+  - eQTLGen_Whole_Blood.db           (processed weights from eQTLGen Z-scores)
+  - 1000G_EUR_covariance.txt.gz
+  - FinnGen_R13_DR.sumstats.gz
+
+Model stats:
+  - Genes with eQTL: ~16,000 (eQTLGen)
+  - SNPs per gene: median ~625 (range 1-5000+)
+  - Distinct from GTEx: eQTLGen uses single-SNP meta-analysis Z-scores
+    (not MASHR Bayesian shrinkage), resulting in many more SNPs per gene
+
+Output file: results/eqtlgen_Whole_Blood_DR.csv
+  - Total rows: ~100-199 (genes tested with full covariance match)
+  - n_SNPs_Model: number of SNPs in the prediction model
+  - n_SNPs_Matched: number of SNPs matched to GWAS
+
+========================================================================
+RUN 2: eQTLGen Whole_Blood — DN (FinnGen R13)
+========================================================================
+Date:         2026-06-10 (approximate)
+Command:
+  python SPrediXcan.py \
+    --model_db_path eQTLGen_Whole_Blood.db \
+    --covariance 1000G_EUR_covariance.txt.gz \
+    --gwas_file FinnGen_R13_DN.sumstats.gz \
+    --snp_column rsid \
+    --effect_allele_column alt \
+    --non_effect_allele_column ref \
+    --beta_column beta \
+    --se_column se \
+    --pvalue_column pval \
+    --output_file results/eqtlgen_Whole_Blood_DN.csv \
+    --additional_output
+
+Output file: results/eqtlgen_Whole_Blood_DN.csv
+  - Same format as Run 1
+
+========================================================================
+RUN 3: eQTLGen Whole_Blood — DPN (FinnGen R13)
+========================================================================
+Date:         2026-06-10 (approximate)
+Command:
+  python SPrediXcan.py \
+    --model_db_path eQTLGen_Whole_Blood.db \
+    --covariance 1000G_EUR_covariance.txt.gz \
+    --gwas_file FinnGen_R13_DPN.sumstats.gz \
+    --snp_column rsid \
+    --effect_allele_column alt \
+    --non_effect_allele_column ref \
+    --beta_column beta \
+    --se_column se \
+    --pvalue_column pval \
+    --output_file results/eqtlgen_Whole_Blood_DPN.csv \
+    --additional_output
+
+Output file: results/eqtlgen_Whole_Blood_DPN.csv
+
+========================================================================
+KEY DIFFERENCES FROM GTEx v8 RUNS
+========================================================================
+| Feature                | GTEx v8 MASHR          | eQTLGen               |
+|------------------------|------------------------|-----------------------|
+| Sample size            | ~600 (per tissue)      | 31,684                |
+| Tissue(s)              | Nerve_Tibial + Blood   | Whole blood (only)    |
+| Model type             | MASHR Bayesian sparse  | Single-variant Z-meta |
+| SNPs per gene (median) | 2-3                    | ~625                  |
+| Effect size estimation | Posterior mean (shrink)| Meta-analysis Z-score |
+| Runtime per GWAS       | ~5-10 min              | ~30-60 min            |
+
+========================================================================
+END OF eQTLGen TWAS LOG
+========================================================================
