@@ -452,8 +452,8 @@ def fig5_love_plot(data):
     covar = data['covar']
     matches = data['matches']
 
-    cand_genes = covar[covar['Group'] == 'Candidate']
-    non_covar = covar[covar['Group'] == 'NonCandidate']
+    cand_mask = covar['Group'] == 'Candidate'
+    nonc_mask = covar['Group'] == 'NonCandidate'
 
     cand_matched = matches[matches['treated'] == 1].set_index('subclass')
     ctrl_matched = matches[matches['treated'] == 0].set_index('subclass')
@@ -468,7 +468,8 @@ def fig5_love_plot(data):
         return (m1 - m2) / sp if sp > 0 else 0
 
     # Before matching: Candidate vs all NonCandidate
-    params = ['Length_bp', 'GC_pct', 'Max_eQTL_SNPs']
+    # Use Length_bp (log10-transformed), GC_pct, eQTL_SNPs_Mean_Num with NA imputation
+    params = ['Length_bp', 'GC_pct', 'eQTL_SNPs_Mean_Num']
     params_label = ['Gene Length (bp, log10)', 'GC Content (%)', 'eQTL SNP Count']
 
     smd_before = []
@@ -476,30 +477,46 @@ def fig5_love_plot(data):
     labels_short = ['Length', 'GC%', 'eQTL SNPs']
 
     for col, label in zip(params, params_label):
-        # Before
-        v_cand = cand_genes[col].dropna().values
-        v_ctrl = non_covar[col].dropna().values
+        # Before: candidates vs all non-candidates
+        v_cand_raw = covar.loc[cand_mask, col]
+        v_ctrl_raw = covar.loc[nonc_mask, col]
 
         if col == 'Length_bp':
-            v_cand = np.log10(v_cand[v_cand > 0])
-            v_ctrl = np.log10(v_ctrl[v_ctrl > 0])
+            v_cand = np.log10(v_cand_raw[v_cand_raw > 0].dropna().values)
+            v_ctrl = np.log10(v_ctrl_raw[v_ctrl_raw > 0].dropna().values)
+        elif col == 'eQTL_SNPs_Mean_Num':
+            # Impute NAs with group median (same as R script)
+            v_cand_arr = v_cand_raw.dropna().values.astype(float)
+            v_ctrl_arr = v_ctrl_raw.dropna().values.astype(float)
+            cand_med = np.median(v_cand_arr)
+            ctrl_med = np.median(v_ctrl_arr)
+            v_cand = np.where(pd.isna(v_cand_raw.values.astype(float)), cand_med, v_cand_raw.values.astype(float))
+            v_ctrl = np.where(pd.isna(v_ctrl_raw.values.astype(float)), ctrl_med, v_ctrl_raw.values.astype(float))
+        else:
+            v_cand = v_cand_raw.dropna().values.astype(float)
+            v_ctrl = v_ctrl_raw.dropna().values.astype(float)
 
         smd_before.append(calc_smd(v_cand, v_ctrl))
 
-        # After
+        # After: use matched pairs file (now has GC_pct + n_eQTL_SNPs directly)
         merged = cand_matched.join(ctrl_matched, lsuffix='_cand', rsuffix='_ctrl')
         if col == 'Length_bp':
-            after_cand = merged['log10_Length_cand'].dropna().values
-            after_ctrl = merged['log10_Length_ctrl'].dropna().values
-        elif col == 'Max_eQTL_SNPs':
-            after_cand = merged['n_eQTL_SNPs_cand'].dropna().values
-            after_ctrl = merged['n_eQTL_SNPs_ctrl'].dropna().values
-        else:
-            gc_dict = dict(zip(covar['Gene'], covar['GC_pct']))
-            after_cand = merged['Gene_cand'].map(gc_dict).dropna().values
-            after_ctrl = merged['Gene_ctrl'].map(gc_dict).dropna().values
+            after_cand = merged['log10_Length_cand'].dropna().values.astype(float)
+            after_ctrl = merged['log10_Length_ctrl'].dropna().values.astype(float)
+        elif col == 'eQTL_SNPs_Mean_Num':
+            after_cand = merged['n_eQTL_SNPs_cand'].dropna().values.astype(float)
+            after_ctrl = merged['n_eQTL_SNPs_ctrl'].dropna().values.astype(float)
+        else:  # GC_pct
+            after_cand = merged['GC_pct_cand'].dropna().values.astype(float)
+            after_ctrl = merged['GC_pct_ctrl'].dropna().values.astype(float)
 
         smd_after.append(calc_smd(after_cand, after_ctrl))
+
+    # Print computed values for verification
+    print(f"  Computed SMD values:")
+    for i, (b, a) in enumerate(zip(smd_before, smd_after)):
+        print(f"    {labels_short[i]}: before={b:.3f}, after={a:.3f}")
+    print(f"  All |SMD|<0.1 after? {'YES' if all(abs(s) < 0.1 for s in smd_after) else 'NO'}")
 
     # Plot as Love Plot
     fig, ax = plt.subplots(figsize=(8, 5))
@@ -513,8 +530,8 @@ def fig5_love_plot(data):
         ax.plot([smd_before[i], smd_after[i]], [i, i], 'gray', lw=0.8, alpha=0.5)
 
     ax.axvline(0, color='gray', linestyle='-', alpha=0.3, lw=0.5)
-    ax.axvline(-0.1, color='gray', linestyle=':', alpha=0.3, lw=0.5)
-    ax.axvline(0.1, color='gray', linestyle=':', alpha=0.3, lw=0.5)
+    ax.axvline(-0.25, color='gray', linestyle=':', alpha=0.3, lw=0.5)
+    ax.axvline(0.25, color='gray', linestyle=':', alpha=0.3, lw=0.5)
 
     ax.set_yticks(y)
     ax.set_yticklabels(labels_short, fontsize=11)
