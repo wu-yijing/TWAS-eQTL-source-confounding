@@ -1,0 +1,46 @@
+# Housekeeping Genes for TWAS Negative Control
+# 30 human housekeeping genes — curated for TWAS control analysis
+#
+# Selection criteria:
+#   1. Consistently ranked as stably expressed across 52 GTEx tissues (Hounkpe et al. 2024, Sci Rep)
+#   2. No known association with HOTAIR pathway, T2DM, DR, DN, or DPN in GWAS Catalog
+#   3. Not present in the study's existing 104-gene panel (30 candidates + 44 non-candidates + 30 T2DM controls)
+#   4. Manual cross-check against published HOTAIR RIP-seq/RAP-MS datasets
+#   5. Classical housekeeping gene set from Eisenberg & Levanon (2013) Trends Genet
+#
+# IMPORTANT: After running S-PrediXcan, confirm no genes in this list appear in
+# the study's Supplementary Table with FDR q<0.05 for any phenotype under either eQTL source.
+# If >2 HKGs show FDR significance, flag as potential off-target signal.
+#
+# Usage: pass this file (one gene symbol per line, no header) to the run_hk_pipeline.sh script.
+# ==============================================================================
+GAPDH
+ACTB
+B2M
+RPLP0
+UBC
+TBP
+HPRT1
+GUSB
+SDHA
+HMBS
+YWHAZ
+RPL13A
+PPIA
+IPO8
+POLR2A
+TFRC
+ALDOA
+PGK1
+LDHA
+ENO1
+TPI1
+NONO
+PUM1
+PSMG2
+EEF1A1
+EEF2
+RPS18
+RPL32
+RPS20
+CYC1
