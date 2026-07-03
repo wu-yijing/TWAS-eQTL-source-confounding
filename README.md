@@ -163,7 +163,7 @@ conda activate twas-eqtl
 
 ### R
 - `matchit` (>= 4.5.0) — for Mahalanobis matching
-- S-PrediXcan (v1.0) — see [https://github.com/hakyimlab/MetaXcan](https://github.com/hakyimlab/MetaXcan)
+- S-PrediXcan (v1.0, MetaXcan v0.8.1) — see [https://github.com/hakyimlab/MetaXcan](https://github.com/hakyimlab/MetaXcan)
 
 ## Usage
 
