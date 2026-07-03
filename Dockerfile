@@ -60,9 +60,9 @@ RUN R -e "install.packages(c('MatchIt', 'cobalt', 'optmatch', 'Rcpp', 'RcppArmad
 # Stage 3: MetaXcan（S-PrediXcan 工具，用于完整管道复现）
 # =============================================================================
 
-RUN git clone https://github.com/hakyimlab/MetaXcan.git /opt/MetaXcan && \
+RUN git clone --branch v0.8.1 https://github.com/hakyimlab/MetaXcan.git /opt/MetaXcan && \
     cd /opt/MetaXcan && \
-    git checkout 6a5b5e7 && \
+    git checkout tags/v0.8.1 && \
     find /opt/MetaXcan -name "*.pyc" -delete
 
 # 设置 MetaXcan 到 PATH
