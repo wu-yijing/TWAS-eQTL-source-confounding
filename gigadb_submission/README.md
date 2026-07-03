@@ -18,7 +18,7 @@ This dataset contains processed S-PrediXcan TWAS results comparing two eQTL weig
 | `eqtlgen_spredixcan_results.csv` | 219 | 8 | 18 KB | eQTLGen S-PrediXcan full results: Z-scores and P-values for all gene-phenotype pairs |
 | `eqtlgen_vs_gtex_comparison.csv` | 102 | 6 | 5 KB | Paired GTEx vs eQTLGen Z-scores with direction consistency indicators |
 | `covariate_matrix.csv` | 114 | 14 | 9 KB | Gene-level covariates: group assignment, protein source, length, GC%, eQTL SNP counts |
-| `mahalanobis_matched_pairs.csv` | 60 | 7 | 3.5 KB | 30 Mahalanobis-matched candidate-control gene pairs with covariate values |
+| `mahalanobis_matched_pairs.csv` | 60 | 8 | 3.6 KB | 30 Mahalanobis-matched candidate-control gene pairs with covariate values (updated: 2026-06-30, 44 high-confidence non-candidate pool) |
 | `enrichment_comparison.csv` | 6 | 10 | 618 B | FDR enrichment rates by group, phenotype, and eQTL source |
 | `candidate_comparison_DR.csv` | 28 | 9 | 2.4 KB | Candidate gene eQTLGen Z-scores for DR phenotype with GTEx cross-reference |
 | `viz_z_distribution.csv` | 126 | 7 | 7.5 KB | Z-score distribution data for density and scatter visualization |

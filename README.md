@@ -103,7 +103,12 @@ TWAS-eQTL-source-confounding/
 │   ├── python/
 │   │   ├── 01_visualize_mahalanobis_love_plot.py    # Love plot (covariate balance)
 │   │   ├── 02_density_scatter_consistency.py         # Density, scatter, bar charts
-│   │   └── 03_enrichment_analysis.py                 # Enrichment + statistical tests
+│   │   ├── 03_enrichment_analysis.py                 # Enrichment + statistical tests
+│   │   ├── 04_generate_all_figures.py                # All main + supp figures (GigaScience-sized)
+│   │   ├── 05_generate_decision_framework.py         # Decision framework flowchart (Fig 6)
+│   │   ├── 06_generate_supplementary_figures.py      # Supplementary figures S5-S7
+│   │   ├── 07_generate_supplementary_tables.py       # Supplementary tables S4-S6
+│   │   └── 08_generate_tables_S1_S2.py               # Supplementary tables S1-S2
 │   └── R/
 │       └── (placeholder)                             # matchit R scripts
 ├── data/

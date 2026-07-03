@@ -146,7 +146,7 @@ def fig1_flowchart(data):
     """
     print("  Fig 1: Research design flowchart (schematic)")
 
-    fig, ax = plt.subplots(figsize=(12, 10))
+    fig, ax = plt.subplots(figsize=(6.69, 5.58))
     ax.set_xlim(0, 12)
     ax.set_ylim(0, 10)
     ax.axis('off')
@@ -211,10 +211,10 @@ def fig1_flowchart(data):
                     xytext=(gx + 3.5/2 if '0.5' in str(gx) else gx + (3.5 if gx == 4.5 else 3.0)/2, gy),
                     arrowprops=arrow_props)
 
-    plt.title('Figure 1. Analytical Framework', fontsize=14, fontweight='bold', pad=15)
+    plt.title('Figure 7. Analytical Framework', fontsize=14, fontweight='bold', pad=15)
     plt.tight_layout()
-    plt.savefig(os.path.join(FIG_DIR, 'Fig1_Flowchart.pdf'))
-    plt.savefig(os.path.join(FIG_DIR, 'Fig1_Flowchart.png'))
+    plt.savefig(os.path.join(FIG_DIR, 'Fig7_Flowchart.pdf'))
+    plt.savefig(os.path.join(FIG_DIR, 'Fig7_Flowchart.png'))
     plt.close()
     print("  → Fig1 saved")
 
@@ -228,7 +228,7 @@ def fig2_scatter(data):
     comp = data['comp']
     comp = comp[comp['Z_eQTLGen'].notna() & comp['Z_GTEx'].notna()]
 
-    fig, axes = plt.subplots(1, 3, figsize=(16, 5.5))
+    fig, axes = plt.subplots(1, 3, figsize=(6.69, 2.30))
 
     for i, (ax, trait) in enumerate(zip(axes, ['DR', 'DN', 'DPN'])):
         sub = comp[comp['Trait'] == trait]
@@ -277,11 +277,11 @@ def fig2_scatter(data):
         if i == 0:
             ax.legend(fontsize=8, loc='upper left', framealpha=0.7)
 
-    fig.suptitle('Figure 2. GTEx vs eQTLGen TWAS Z-score Comparison',
+    fig.suptitle('Figure 1. GTEx vs eQTLGen TWAS Z-score Comparison',
                  fontsize=14, fontweight='bold', y=1.02)
     plt.tight_layout()
-    plt.savefig(os.path.join(FIG_DIR, 'Fig2_Scatter_Plot.pdf'))
-    plt.savefig(os.path.join(FIG_DIR, 'Fig2_Scatter_Plot.png'))
+    plt.savefig(os.path.join(FIG_DIR, 'Fig1_Scatter_Plot.pdf'))
+    plt.savefig(os.path.join(FIG_DIR, 'Fig1_Scatter_Plot.png'))
     plt.close()
     print("  → Fig2 saved")
 
@@ -320,7 +320,7 @@ def fig3_waterfall(data):
     comp_dr = comp[comp['Trait'] == 'DR']
     comp_dict = dict(zip(comp_dr['Gene'], comp_dr['Z_GTEx']))
 
-    fig, ax = plt.subplots(figsize=(12, 6))
+    fig, ax = plt.subplots(figsize=(6.69, 3.35))
 
     y_pos = np.arange(len(gene_list))
     bar_height = 0.35
@@ -345,7 +345,7 @@ def fig3_waterfall(data):
     ax.set_yticks(y_pos)
     ax.set_yticklabels(gene_list, fontsize=10)
     ax.set_xlabel('|Z-score|', fontsize=11)
-    ax.set_title('Figure 3. Core Gene |Z-score|: GTEx vs eQTLGen (DR)',
+    ax.set_title('Figure 2. Core Gene |Z-score|: GTEx vs eQTLGen (DR)',
                  fontsize=13, fontweight='bold')
     ax.axvline(1.96, color='red', linestyle='--', alpha=0.5, lw=0.8)
     ax.text(1.98, ax.get_ylim()[1] - 0.5, '|Z|=1.96', fontsize=8, color='red')
@@ -360,10 +360,10 @@ def fig3_waterfall(data):
 
     ax.legend(loc='lower right', fontsize=10)
     plt.tight_layout()
-    plt.savefig(os.path.join(FIG_DIR, 'Fig3_Waterfall.pdf'))
-    plt.savefig(os.path.join(FIG_DIR, 'Fig3_Waterfall.png'))
+    plt.savefig(os.path.join(FIG_DIR, 'Fig2_Waterfall.pdf'))
+    plt.savefig(os.path.join(FIG_DIR, 'Fig2_Waterfall.png'))
     plt.close()
-    print("  → Fig3 saved")
+    print("  → Fig2 saved")
 
 
 # ===================================================================
@@ -393,7 +393,7 @@ def fig4_enrichment(data):
         rate = n_fdr / n_tested * 100 if n_tested > 0 else 0
 
     # Create grouped bar chart
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(6.69, 4.01))
 
     groups = ['Candidate', 'NonCandidate', 'T2DM']
     x = np.arange(len(groups))
@@ -431,16 +431,16 @@ def fig4_enrichment(data):
     ax.set_xticks(x)
     ax.set_xticklabels(groups, fontsize=11)
     ax.set_ylabel('FDR Significant Rate (%)', fontsize=11)
-    ax.set_title('Figure 4. Enrichment Rate: GTEx v8 vs eQTLGen (DR)',
+    ax.set_title('Figure 3. Enrichment Rate: GTEx v8 vs eQTLGen (DR)',
                  fontsize=13, fontweight='bold')
     ax.legend(fontsize=10)
     ax.set_ylim(0, 60)
 
     plt.tight_layout()
-    plt.savefig(os.path.join(FIG_DIR, 'Fig4_Enrichment.pdf'))
-    plt.savefig(os.path.join(FIG_DIR, 'Fig4_Enrichment.png'))
+    plt.savefig(os.path.join(FIG_DIR, 'Fig3_Enrichment.pdf'))
+    plt.savefig(os.path.join(FIG_DIR, 'Fig3_Enrichment.png'))
     plt.close()
-    print("  → Fig4 saved")
+    print("  → Fig3 saved")
 
 
 # ===================================================================
@@ -519,7 +519,7 @@ def fig5_love_plot(data):
     print(f"  All |SMD|<0.1 after? {'YES' if all(abs(s) < 0.1 for s in smd_after) else 'NO'}")
 
     # Plot as Love Plot
-    fig, ax = plt.subplots(figsize=(8, 5))
+    fig, ax = plt.subplots(figsize=(3.35, 2.09))
     y = np.arange(len(params))
 
     ax.scatter(smd_before, y, c=C_CANDIDATE, marker='o', s=100, label='Before matching', zorder=5)
@@ -536,7 +536,7 @@ def fig5_love_plot(data):
     ax.set_yticks(y)
     ax.set_yticklabels(labels_short, fontsize=11)
     ax.set_xlabel('Standardized Mean Difference (SMD)', fontsize=11)
-    ax.set_title('Figure 5. Covariate Balance (Love Plot)', fontsize=13, fontweight='bold')
+    ax.set_title('Figure 4. Covariate Balance (Love Plot)', fontsize=13, fontweight='bold')
     ax.legend(fontsize=10, loc='lower right')
 
     # Add SMD values
@@ -545,10 +545,10 @@ def fig5_love_plot(data):
                 va='center', fontsize=8, alpha=0.7)
 
     plt.tight_layout()
-    plt.savefig(os.path.join(FIG_DIR, 'Fig5_Love_Plot.pdf'))
-    plt.savefig(os.path.join(FIG_DIR, 'Fig5_Love_Plot.png'))
+    plt.savefig(os.path.join(FIG_DIR, 'Fig4_Love_Plot.pdf'))
+    plt.savefig(os.path.join(FIG_DIR, 'Fig4_Love_Plot.png'))
     plt.close()
-    print("  → Fig5 saved")
+    print("  → Fig4 saved")
 
 
 # ===================================================================
@@ -561,7 +561,7 @@ def fig6_rnh1_attenuation(data):
     rnh1_gtex = data['rnh1_gtex']
 
     # Panel A: eQTL source comparison (waterfall for 3 phenotypes)
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5.5))
+    fig, axes = plt.subplots(1, 2, figsize=(6.69, 2.63))
 
     # Panel A: GTEx vs eQTLGen for RNH1 across 3 phenotypes
     ax = axes[0]
@@ -621,13 +621,13 @@ def fig6_rnh1_attenuation(data):
     ax.set_xlim(-1, 10)
     ax.invert_yaxis()
 
-    fig.suptitle('Figure 6. RNH1 Effect Attenuation Across eQTL Sources and Populations',
+    fig.suptitle('Figure 5. RNH1 Effect Attenuation Across eQTL Sources and Populations',
                  fontsize=14, fontweight='bold', y=1.02)
     plt.tight_layout()
-    plt.savefig(os.path.join(FIG_DIR, 'Fig6_RNH1_Attenuation.pdf'))
-    plt.savefig(os.path.join(FIG_DIR, 'Fig6_RNH1_Attenuation.png'))
+    plt.savefig(os.path.join(FIG_DIR, 'Fig5_RNH1_Attenuation.pdf'))
+    plt.savefig(os.path.join(FIG_DIR, 'Fig5_RNH1_Attenuation.png'))
     plt.close()
-    print("  → Fig6 saved")
+    print("  → Fig5 saved")
 
 
 # ===================================================================
@@ -649,17 +649,17 @@ def fig_s1_acat_sensitivity(data):
     ax.set_xticks(x)
     ax.set_xticklabels(methods, fontsize=11)
     ax.set_ylabel('FDR Significant Pairs', fontsize=11)
-    ax.set_title('Figure S1. FDR Rate: Stouffer vs ACAT-O\n(Multi-tissue Z-score merger sensitivity)',
+    ax.set_title('Figure S3. FDR Rate: Stouffer vs ACAT-O\n(Multi-tissue Z-score merger sensitivity)',
                  fontsize=12, fontweight='bold')
     for bar, val in zip(bars, n_fdr):
         ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.3,
                 str(val), ha='center', fontsize=12, fontweight='bold')
     ax.set_ylim(0, 20)
     plt.tight_layout()
-    plt.savefig(os.path.join(FIG_DIR, 'FigS1_ACAT_Sensitivity.pdf'))
-    plt.savefig(os.path.join(FIG_DIR, 'FigS1_ACAT_Sensitivity.png'))
+    plt.savefig(os.path.join(FIG_DIR, 'FigS3_ACAT_Sensitivity.pdf'))
+    plt.savefig(os.path.join(FIG_DIR, 'FigS3_ACAT_Sensitivity.png'))
     plt.close()
-    print("  → FigS1 saved")
+    print("  → FigS3 saved")
 
 
 def fig_s2_pulldown_stratification(data):
@@ -732,13 +732,13 @@ def fig_s3_mahalanobis_all_pairs(data):
         ax.set_ylabel(label, fontsize=10)
         ax.set_title(f'{col}', fontsize=11)
 
-    fig.suptitle('Figure S3. Mahalanobis Matched Pairs: All 30 Pairs',
+    fig.suptitle('Figure S1. Mahalanobis Matched Pairs: All 30 Pairs',
                  fontsize=13, fontweight='bold', y=1.02)
     plt.tight_layout()
-    plt.savefig(os.path.join(FIG_DIR, 'FigS3_Matched_Pairs.pdf'))
-    plt.savefig(os.path.join(FIG_DIR, 'FigS3_Matched_Pairs.png'))
+    plt.savefig(os.path.join(FIG_DIR, 'FigS1_Matched_Pairs.pdf'))
+    plt.savefig(os.path.join(FIG_DIR, 'FigS1_Matched_Pairs.png'))
     plt.close()
-    print("  → FigS3 saved")
+    print("  → FigS1 saved")
 
 
 def fig_s4_zdist_density(data):
