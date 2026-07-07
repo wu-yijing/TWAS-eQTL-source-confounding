@@ -1,0 +1,2 @@
+Supplementary Figure S5. eQTL SNP Count Distribution.
+Panel A: Boxplot of mean eQTL SNP counts per gene (model SNPs) by group, showing Candidate (red), Non-Candidate (blue), and T2DM Control (green) distributions. The red dashed line marks the GTEx MASHR median (~2.3 SNPs/gene). Panel B: Representative cis-eQTL count comparison between GTEx v8 (median ≈2.3) and eQTLGen (median ≈47), illustrating the ~20-fold difference in cis-eQTL density between the two resources.

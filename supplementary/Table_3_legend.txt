@@ -1,0 +1,2 @@
+Table 3. Integrated Evidence Assessment.
+Summary of evidence for the study's primary claims across all analytical layers. Claims evaluated: RNH1 as top candidate, candidate gene enrichment, cross-population replicability. For each claim: GTEx evidence, eQTLGen evidence, Mahalanobis matching confirmation, replication evidence, and overall verdict (Reassess / Not supported / Unreplicable).

@@ -1,0 +1,2 @@
+Supplementary Figure S6. Direction Consistency Sensitivity Across P-value Thresholds.
+Direction consistency rate between GTEx v8 and eQTLGen TWAS Z-scores as a function of the |Z| threshold (0.01–0.50). The blue line with dots shows the observed consistency rate. Gray dashed line marks random expectation (50%). Red dotted line marks the overall observed rate (59.5%). The consistency rate is stable across thresholds, indicating that the ~60% direction consistency is not an artifact of a specific significance threshold.

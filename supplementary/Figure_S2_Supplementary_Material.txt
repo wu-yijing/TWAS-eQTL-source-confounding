@@ -1,0 +1,2 @@
+Supplementary Figure S2. Pull-down vs Literature Stratification (eQTLGen).
+FDR enrichment rates stratified by identification source (RNA pull-down vs literature curation) across three diabetic complications. Bar heights indicate eQTLGen-based FDR significance rates with numerator/denominator annotations.

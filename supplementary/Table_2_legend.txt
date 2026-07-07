@@ -1,0 +1,2 @@
+Table 2. FDR Enrichment Rates by Group, Phenotype, and eQTL Source.
+FDR significant rates (%) for three gene groups (Candidate, Non-Candidate, T2DM Control) across DR/DN/DPN under GTEx v8 and eQTLGen weights. The candidate group shows enrichment inversion: from highest under GTEx (40.7%) to lowest under eQTLGen (0%), while non-candidates show the opposite pattern (33.3% → 65.5–75.9%).

@@ -1,0 +1,2 @@
+Supplementary Figure S7. |Z| Distribution by Gene Group (eQTLGen, log10 Scale).
+Log10-transformed histograms of eQTLGen |Z| scores for three gene groups: 30 HOTAIR Candidate genes (median |Z|=3.40, 66.7% >1.96), 30 T2DM Control genes (median |Z|=2.78, 58.3% >1.96), and 44 Non-Candidate genes (median |Z|=3.63, 72.4% >1.96). Red dashed line marks |Z|=1.96 significance threshold. The distributions confirm that non-candidates show the strongest eQTLGen signals.

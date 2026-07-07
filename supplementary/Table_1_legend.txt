@@ -1,0 +1,2 @@
+Table 1. GTEx vs eQTLGen Z-score Comparison for Core Genes.
+Summary of key candidate genes showing the most extreme eQTL-source-dependent discordance across diabetic complications. Columns: Gene symbol, Complication (DR/DN/DPN), GTEx Z-score, eQTLGen Z-score, Direction Consistency (Consistent/Inconsistent), and Annotation. RNH1 shows the most dramatic discordance in DR (GTEx Z=+13.82 vs eQTLGen Z=+1.18). CKAP4 shows cross-complication signals under GTEx.

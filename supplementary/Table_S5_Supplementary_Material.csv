@@ -1,0 +1,13 @@
+﻿Gene,Phenotype,Dataset,Z_score,P_value,Direction_vs_FinnGen_eQTLGen,Note
+RNH1,DR,UKB GCST90043640 DR,+0.57,>0.05,Consistent,All UKB DR P>0.05
+RNH1,DR,UKB Xue et al. 2022 DR,+0.95,>0.05,Consistent,All UKB DR P>0.05
+RNH1,DN,Sakaue et al. 2021 DN,+3.59,>0.05,Consistent,All UKB DR P>0.05
+CKAP4,DN,UKB (direction consistent),+0.50,>0.05,Consistent,All UKB DR P>0.05
+HSP90AB1,DN,UKB (direction consistent),+0.45,>0.05,Consistent,All UKB DR P>0.05
+RPS14,DN,UKB (direction consistent),+0.38,>0.05,Consistent,All UKB DR P>0.05
+EEF2,DN,UKB (not significant),+0.20,>0.05,Consistent,All UKB DR P>0.05
+
+Meta-analysis,DR,FinnGen + 2 UKB,+3.37,7.4e-4,—,Fixed-effect meta-analysis
+Heterogeneity,DR,Cochran Q=40.0,I²=95.0%,<0.0001,—,Extreme heterogeneity
+Prediction Interval,DR,95% PI,"[-4.00, +10.68]",—,Crosses zero,Unreplicable in future cohorts
+Direction Consistency,DR,8 testable genes,87.5% (7/8),P=0.035,Binomial test,Nominal direction preservation

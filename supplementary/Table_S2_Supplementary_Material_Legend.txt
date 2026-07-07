@@ -1,0 +1,14 @@
+**Supplementary Table S2.** GTEx v8 baseline TWAS results for all analyzed genes across two tissues (Nerve_Tibial and Whole_Blood) and three diabetic complications (DR, DN, DPN).
+- **Gene:** HGNC gene symbol
+- **Group:** Candidate / NonCandidate / T2DM_Control
+- **Z_Nerve_Tibial_{trait}:** S-PrediXcan Z-score using GTEx v8 Nerve_Tibial eQTL weights
+- **P_Nerve_Tibial_{trait}:** Corresponding P-value
+- **SNPs_Model_Nerve_Tibial_{trait}:** Number of SNPs in the predictive model for this tissue-trait pair
+- **Z_Whole_Blood_{trait}:** S-PrediXcan Z-score using GTEx v8 Whole_Blood eQTL weights
+- **P_Whole_Blood_{trait}:** Corresponding P-value
+- **SNPs_Model_Whole_Blood_{trait}:** Number of SNPs in the predictive model
+- **Z_Multi_{trait}:** Stouffer's weighted Z-meta multi-tissue integrated Z-score
+- **P_Multi_{trait}:** Corresponding P-value
+- **FDR_Multi_{trait}:** Benjamini-Hochberg FDR q-value across multi-tissue integrated results
+- **P_ACAT_O_{trait}:** Aggregated Cauchy Association Test Omnibus P-value (LD-robust)
+- **FDR_ACAT_O_{trait}:** FDR q-value for ACAT-O results

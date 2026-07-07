@@ -1,0 +1,2 @@
+Supplementary Figure S3. Multi-tissue Integration Method Sensitivity.
+Comparison of FDR-significant gene-phenotype pairs between Stouffer's weighted Z-meta analysis (15 pairs) and ACAT-O (14 pairs). The high concordance confirms that the choice of multi-tissue integration method has minimal impact on FDR conclusions.

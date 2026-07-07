@@ -1,0 +1,2 @@
+Supplementary Figure S1. Mahalanobis Matched Pairs: Covariate Distribution.
+Boxplots showing the distribution of three matching covariates (log10 gene length, eQTL SNP count, GC%) across 30 candidate-control pairs. Gray lines connect each candidate gene to its matched control. Outliers in eQTL SNP count (n=2) are balanced across groups. The matching algorithm successfully paired genes with similar multivariate covariate profiles.

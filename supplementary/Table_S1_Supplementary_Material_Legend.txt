@@ -1,0 +1,11 @@
+**Supplementary Table S1.** Gene list with group assignment, identification source, pull-down mass spectrometry metrics, and genomic covariates.
+- **Gene:** HGNC gene symbol
+- **Group:** Candidate (HOTAIR-binding protein), NonCandidate (HOTAIR-binding Unused≥2.0), T2DM_Control (T2DM GWAS literature genes)
+- **Source:** RNA Pull-down (identified by mass spectrometry), Literature Curation (validated HOTAIR literature targets), GWAS Literature (known T2DM-associated genes from GWAS)
+- **Analyzed:** Yes/No — whether the gene had eQTLGen weights available for S-PrediXcan analysis (19/30 candidates analyzed)
+- **PD_Unused_Score:** Unused intensity score from RNA pull-down MS
+- **PD_Sequence_Coverage_Pct:** Sequence coverage percentage in pull-down MS
+- **PD_Peptides_95pct:** Number of peptides with ≥95% confidence
+- **Gene_Length_bp:** Gene length in base pairs
+- **GC_Content_Pct:** GC content percentage
+- **Mean_eQTL_SNP_Count:** Mean number of cis-eQTL SNPs across eQTLGen (where available)

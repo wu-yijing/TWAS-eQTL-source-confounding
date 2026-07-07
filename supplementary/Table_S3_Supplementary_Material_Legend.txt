@@ -1,0 +1,2 @@
+Supplementary Table S4. Gene Covariate Matrix.
+Complete covariate data for all 104+ genes across three groups (30 HOTAIR Candidates, 44+ Non-Candidates, 30 T2DM Controls). Columns: Gene symbol, Group, Source (Pull-down/Literature/GWAS), log10 gene length (bp), Length_bp, GC content (%), Mean eQTL SNP count per gene (model SNPs), and Pull-down Unused score for candidate genes.
