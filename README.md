@@ -1,6 +1,7 @@
 # TWAS eQTL Source Confounding — Systematic Evaluation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21238203.svg)](https://doi.org/10.5281/zenodo.21238203)
 
 ## Overview
 
@@ -178,11 +179,11 @@ python scripts/python/02_density_scatter_consistency.py
 
 ## Reproducibility
 
-All processed data tables are deposited in **GigaDB** under accession [DOI pending]. Analysis scripts are version-controlled in this repository under MIT license.
+All processed data tables are deposited in **GigaDB** under accession [DOI pending]. Analysis scripts are version-controlled in this repository under MIT license. The repository snapshot at the time of submission is archived at Zenodo: [https://doi.org/10.5281/zenodo.21238203](https://doi.org/10.5281/zenodo.21238203).
 
 ## Citation
 
-[Citation information — to be added upon publication]
+Wu Y, Chen M, Wu Q, Zhao J, Jin G. (2026). TWAS eQTL Source Confounding — Systematic Evaluation (v1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.21238203](https://doi.org/10.5281/zenodo.21238203)
 
 ## License
 
