@@ -120,9 +120,9 @@ draw_label(ax, 7, -1.0,
 
 # Save
 plt.tight_layout()
-plt.savefig('E:/workbuddy/GigaScience投稿/论文生成的图片/Fig7_Decision_Framework.png', 
+plt.savefig('figs/Fig7_Decision_Framework.png', 
             dpi=300, bbox_inches='tight', facecolor='white')
-plt.savefig('E:/workbuddy/GigaScience投稿/论文生成的图片/Fig7_Decision_Framework.pdf', 
+plt.savefig('figs/Fig7_Decision_Framework.pdf', 
             bbox_inches='tight', facecolor='white')
 plt.close()
 

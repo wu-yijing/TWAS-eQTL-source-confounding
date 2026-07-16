@@ -11,7 +11,7 @@ from collections import defaultdict
 sys.stdout.reconfigure(encoding='utf-8')
 
 DATA_DIR = 'E:/workbuddy/2026-06-27-20-58-07/TWAS-eQTL-source-confounding/data/processed'
-FIG_DIR = 'E:/workbuddy/GigaScience投稿/论文生成的图片'
+FIG_DIR = 'figs'
 
 # Read covariate matrix
 genes = []

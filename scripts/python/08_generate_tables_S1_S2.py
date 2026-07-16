@@ -6,7 +6,7 @@ import pandas as pd
 import os
 
 DATA = r"E:/workbuddy/2026-06-27-20-58-07/TWAS-eQTL-source-confounding/data/processed"
-OUT = r"E:/workbuddy/GigaScience投稿/上传论文supplyment/tables"
+OUT = 'data/processed'
 
 # ─────────────────────────────────────────────
 # Table S1: Gene List with Group Assignment

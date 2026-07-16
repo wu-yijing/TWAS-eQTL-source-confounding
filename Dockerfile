@@ -14,7 +14,6 @@ FROM continuumio/miniconda3:latest AS base
 LABEL maintainer="Yijing Wu <1045381056@qq.com>"
 LABEL description="TWAS eQTL source confounding reproducibility environment"
 LABEL version="1.0"
-LABEL gigaScience-compatible="true"
 
 # =============================================================================
 # Stage 1: 系统依赖 + Conda 环境

@@ -9,7 +9,7 @@ This repository contains analysis scripts and processed data for:
 
 **"eQTL source confounding systematically biases TWAS cross-population replication: a quantitative evaluation in HOTAIR binding proteins across 104 genes and three diabetic complications"**
 
-Target journal: **GigaScience**
+Target journal: **iScience** (under consideration)
 
 ### Core Question
 
@@ -94,7 +94,6 @@ docker run --rm \
 │   └── R/                         # R scripts (Mahalanobis matching)
 ├── figs/                          # Generated figures
 ├── docs/                          # Documentation
-├── gigadb_submission/             # GigaDB submission files
 └── analyses/logs/                 # Provenance logs + SHA256 checksums
 ```
 
@@ -105,7 +104,7 @@ TWAS-eQTL-source-confounding/
 │   │   ├── 01_visualize_mahalanobis_love_plot.py    # Love plot (covariate balance)
 │   │   ├── 02_density_scatter_consistency.py         # Density, scatter, bar charts
 │   │   ├── 03_enrichment_analysis.py                 # Enrichment + statistical tests
-│   │   ├── 04_generate_all_figures.py                # All main + supp figures (GigaScience-sized)
+│   │   ├── 04_generate_all_figures.py                # All main + supp figures
 │   │   ├── 05_generate_decision_framework.py         # Decision framework flowchart (Fig 6)
 │   │   ├── 06_generate_supplementary_figures.py      # Supplementary figures S5-S7
 │   │   ├── 07_generate_supplementary_tables.py       # Supplementary tables S4-S6
@@ -125,8 +124,7 @@ TWAS-eQTL-source-confounding/
 │       ├── viz_z_distribution.csv                     # Z distribution data for viz
 │       └── candidate_comparison_DR.csv                # Candidate DR comparison data
 ├── figs/                                              # Output figures (generated)
-├── docs/
-│   └── gigascience_paper_outline.md                   # Restructured paper outline
+├── docs/                          # Documentation
 ├── environment.yml                                    # Conda environment
 ├── requirements.txt                                   # Python dependencies
 ├── .gitignore
@@ -179,7 +177,7 @@ python scripts/python/02_density_scatter_consistency.py
 
 ## Reproducibility
 
-All processed data tables are deposited in **GigaDB** under accession [DOI pending]. Analysis scripts are version-controlled in this repository under MIT license. The repository snapshot at the time of submission is archived at Zenodo: [https://doi.org/10.5281/zenodo.21238203](https://doi.org/10.5281/zenodo.21238203).
+All processed data tables are provided in `data/processed/`. Analysis scripts are version-controlled in this repository under MIT license. The repository snapshot is archived at Zenodo: [https://doi.org/10.5281/zenodo.21238203](https://doi.org/10.5281/zenodo.21238203).
 
 ## Citation
 

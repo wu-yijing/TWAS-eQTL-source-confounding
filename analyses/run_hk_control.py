@@ -143,7 +143,7 @@ for tissue in ['Nerve_Tibial', 'Whole_Blood']:
         
         # Save - both possible output paths
         out_paths = [
-            rf'E:\workbuddy\GigaScience投稿\2026-06-28-17-42-31 （6 个 GTEx S-PrediXcan 重新跑）\gtex_raw_output\gtex_{tissue}_{pheno}.csv',
+            rf'data/raw/gtex_raw_output/gtex_{tissue}_{pheno}.csv',
             rf'E:\workbuddy\2026-06-28-17-42-31\gtex_raw_output\gtex_{tissue}_{pheno}.csv'
         ]
         

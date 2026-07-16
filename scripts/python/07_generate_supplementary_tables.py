@@ -5,7 +5,7 @@ import csv, sys, os, math
 sys.stdout.reconfigure(encoding='utf-8')
 
 DATA_DIR = 'E:/workbuddy/2026-06-27-20-58-07/TWAS-eQTL-source-confounding/data/processed'
-OUT_DIR = 'E:/workbuddy/GigaScience投稿/supplementary'
+OUT_DIR = 'data/processed'
 
 os.makedirs(OUT_DIR, exist_ok=True)
 
