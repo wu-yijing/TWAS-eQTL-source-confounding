@@ -72,14 +72,13 @@ the MIT license. Containerized reproducibility is provided via the project
 
 ## 6. Pre-submission checklist (author action required)
 
-- [ ] **Legend numbering drift.** The text bodies of `Table_S3` / `Table_S4` /
-      `Table_S5` legends internally label themselves "Supplementary Table S4" /
-      "S5" / "S6", whereas the file names and the main-text citations use
-      **S3 / S4 / S5**. Reconcile the legend headers to S3/S4/S5 before final
-      submission (recommended) or re-number consistently.
-- [ ] **Figure S8 legend header.** `Figure_S8_..._txt` begins directly with the
-      description and is missing the "Supplementary Figure S8." header line present
-      in S1–S7; add the header for consistency.
+- [x] **Legend numbering drift — FIXED.** The `Table_S3` / `Table_S4` /
+      `Table_S5` legend headers previously read "Supplementary Table S4" /
+      "S5" / "S6"; they are now corrected to **S3 / S4 / S5** to match the file
+      names and the main-text citations.
+- [x] **Figure S8 legend header — FIXED.** `Figure_S8_..._txt` now begins with the
+      "Supplementary Figure S8. Enrichment Comparison Across Gene Groups and eQTL
+      Sources." header line, consistent with S1–S7.
 - [ ] Confirm every `Figure S#` legend text matches the corresponding image
       content (cross-check against the manuscript figure-legend list).
 - [ ] Verify `Table S1–S5` / `Figure S1–S8` numbering in the manuscript matches

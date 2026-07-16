@@ -1,2 +1,2 @@
-Supplementary Table S6. Cross-Population Replication Results.
+Supplementary Table S5. Cross-Population Replication Results.
 Summary of cross-population replication for RNH1 and key candidates across multiple datasets. Columns: Gene, Phenotype, Dataset (FinnGen R13, UKB GCST90043640, UKB Xue et al. 2022, Sakaue et al. 2021 DN), Z-score, P-value, Direction vs FinnGen eQTLGen, and Notes. Includes meta-analysis and heterogeneity metrics (Cochran Q=40.0, I²=95.0%, 95% PI [-4.00, +10.68]).
