@@ -1,0 +1,51 @@
+{
+  "pooled": {
+    "source_rho": 0.522,
+    "source_n": 2511,
+    "source_same": 0.683,
+    "source_ci95": [
+      0.489,
+      0.553
+    ],
+    "tissue_rho": 0.509,
+    "tissue_n": 2511,
+    "tissue_same": 0.712,
+    "tissue_ci95": [
+      0.472,
+      0.545
+    ]
+  },
+  "stratified": {
+    "2": {
+      "n": 1685,
+      "source_rho": 0.521,
+      "source_same": 0.69,
+      "tissue_rho": 0.514,
+      "tissue_same": 0.714
+    },
+    "3-4": {
+      "n": 774,
+      "source_rho": 0.528,
+      "source_same": 0.674,
+      "tissue_rho": 0.483,
+      "tissue_same": 0.709
+    },
+    ">=5": {
+      "n": 52,
+      "source_rho": 0.479,
+      "source_same": 0.577,
+      "tissue_rho": 0.691,
+      "tissue_same": 0.692
+    }
+  },
+  "gtex_snp_summary": {
+    "wb_median": 2,
+    "wb_max": 9,
+    "wb_ge5": 190,
+    "nt_median": 2,
+    "nt_max": 10,
+    "nt_ge5": 345,
+    "eqtlgen_median": 786,
+    "eqtlgen_ge5": 10354
+  }
+}

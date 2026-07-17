@@ -1,0 +1,17 @@
+{
+  "limit": 0,
+  "total_genes": 10357,
+  "eq_conv": "ref",
+  "source_axis": {
+    "rho": 0.5222344108335586,
+    "n": 2511,
+    "same_dir": 0.6825965750696934,
+    "note": "eQTLGen_Whole_Blood vs GTEx multi-tissue Stouffer(WB,NT)"
+  },
+  "tissue_axis": {
+    "rho": 0.5087980388325005,
+    "n": 2511,
+    "same_dir": 0.7120669056152927,
+    "note": "GTEx Whole_Blood vs GTEx Nerve_Tibial"
+  }
+}

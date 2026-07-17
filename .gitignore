@@ -39,3 +39,11 @@ figs/*.svg
 # Docker (keep Dockerfile, ignore intermediate build artifacts)
 .dockerignore
 docker-compose*.yml
+
+# ===== SCZ replication large intermediates (regenerate via scripts) =====
+scz_replication/weights.db
+scz_replication/_rdat_tmp/
+scz_replication/*.tar
+scz_replication/*.tar.gz
+scz_replication/*.crdownload
+scz_replication/gtex_v8_mashr_snp_covariance.txt.gz

@@ -7,9 +7,11 @@
 
 This repository contains analysis scripts and processed data for:
 
-**"eQTL source confounding systematically biases TWAS cross-population replication: a quantitative evaluation in HOTAIR binding proteins across 104 genes and three diabetic complications"**
+**"A 2×2 decomposition of TWAS signals by eQTL source and tissue context, with cross-trait and cross-population replication"**
 
-Target journal: **iScience** (under consideration)
+Target journal: **Genetic Epidemiology** (under consideration)
+
+> The original v1.0.0 release (Zenodo [10.5281/zenodo.21238203](https://doi.org/10.5281/zenodo.21238203)) corresponded to the iScience submission titled *"eQTL source confounding systematically biases TWAS cross-population replication …"* (HOTAIR binding proteins, 104 genes, three diabetic complications). v2.0.0 adds the schizophrenia (SCZ) dual-source 2×2 decomposition replication and retargets the manuscript to Genetic Epidemiology.
 
 ### Core Question
 
@@ -28,6 +30,19 @@ Does the choice of eQTL weight source (GTEx v8 tissue-specific vs. eQTLGen large
 | RNH1 GTEx Z-score | +8.50 (FDR q=1.5×10⁻¹⁵) |
 | RNH1 eQTLGen Z-score | +1.18 (P=0.237) |
 | Cross-population I² (RNH1, 3 cohorts) | 95.0% |
+
+## SCZ 2×2 Decomposition Replication (added in v2.0.0)
+
+A dual-source 2×2 decomposition was applied to schizophrenia (SCZ, PGC3 wave3 European) to test whether the source/panel vs tissue-context structure generalizes beyond the metabolic discovery cohort.
+
+- **Method**: self-implemented TWAS Z = (w′R⁻¹z)/√(w′R⁻¹w) with LD from 1000G EUR, ridge RIDGE=0.1; 2×2 axes = source (eQTLGen Whole_Blood vs GTEx multi-tissue Stouffer) and tissue (GTEx Whole_Blood vs GTEx Nerve_Tibial).
+- **Results (n = 2,511 gene–tissue pairs)**:
+  - Source axis ρ = +0.522 (68.3% direction concordance)
+  - Tissue axis ρ = +0.509 (71.2% direction concordance)
+  - Both axes positive and comparable in magnitude — the axis ordering is **trait-dependent**, not a fixed "source always dominates" rule.
+- **Sparsity robustness**: GTEx v8 MASHR models are sparse (median 2 SNPs/gene). Stratifying by model size (2 / 3–4 / ≥5 SNPs) gave stable ρ (≈0.5 across strata) with bootstrap 95% CI excluding zero; the eQTLGen side (median 786 SNPs/gene) anchors the source axis. See `scz_replication/results/`.
+- **Scripts**: `scz_replication/scz_twas.py` (TWAS + decomposition), `scz_replication/build_weights_db.py` (weight DB), `scz_replication/robustness_scz.py` (stratified robustness), `scz_replication/make_figure9_scz.py` + `scz_replication/make_robustness_fig.py` (figures).
+- **Figures**: `figures/scz/Fig9_2x2_decomposition.*` (source/tissue scatter) and `figures/scz/FigS1_sparsity_robustness.*` (stratified robustness).
 
 ## Quick Start (Docker — Recommended)
 
@@ -132,6 +147,26 @@ TWAS-eQTL-source-confounding/
 └── README.md
 ```
 
+## SCZ Replication Folder Layout
+
+```
+scz_replication/
+├── scz_twas.py                  # TWAS Z + 2×2 decomposition (self-implemented)
+├── build_weights_db.py          # assemble eqtlgen / GTEx WB / GTEx NT weight DB
+├── robustness_scz.py           # sparsity-stratified robustness + bootstrap CI
+├── make_figure9_scz.py          # Fig9 source/tissue scatter
+├── make_robustness_fig.py       # FigS1 stratified bar chart
+├── patch_manuscript_scz.py      # manuscript write-back (SCZ section)
+├── patch_robustness.py          # manuscript write-back (limitation)
+└── results/
+    ├── scz_decomp_limit0.json  # decomposition ρ / n / concordance
+    ├── scz_robustness.json     # stratified robustness + CI
+    └── scz_twas_results_limit0.csv  # per-gene TWAS Z (10,357 genes)
+```
+Manuscript (GE-retitled) and cover letter: `manuscript/`. SCZ figures: `figures/scz/`.
+
+> Large intermediates (`weights.db`, extracted eQTLGen RDat weights, raw GWAS) are excluded by `.gitignore`; regenerate via the scripts above.
+
 ## Data Sources
 
 All GWAS and eQTL summary statistics used in this study are from **publicly available sources**:
@@ -177,11 +212,13 @@ python scripts/python/02_density_scatter_consistency.py
 
 ## Reproducibility
 
-All processed data tables are provided in `data/processed/`. Analysis scripts are version-controlled in this repository under MIT license. The repository snapshot is archived at Zenodo: [https://doi.org/10.5281/zenodo.21238203](https://doi.org/10.5281/zenodo.21238203).
+All processed data tables are provided in `data/processed/` and `scz_replication/results/`. Analysis scripts are version-controlled in this repository under MIT license. The repository snapshot is archived at Zenodo: [https://doi.org/10.5281/zenodo.21238203](https://doi.org/10.5281/zenodo.21238203). A new Zenodo version (v2.0.0, including the SCZ replication) is minted automatically when the corresponding GitHub Release is published.
 
 ## Citation
 
 Wu Y, Chen M, Wu Q, Zhao J, Jin G. (2026). TWAS eQTL Source Confounding — Systematic Evaluation (v1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.21238203](https://doi.org/10.5281/zenodo.21238203)
+
+Wu Y, Chen M, Wu Q, Zhao J, Jin G. (2026). TWAS eQTL Source Confounding — Systematic Evaluation (v2.0.0, SCZ 2×2 decomposition replication, retargeted to Genetic Epidemiology). Zenodo. [https://doi.org/10.5281/zenodo.21238203](https://doi.org/10.5281/zenodo.21238203)
 
 ## License
 
