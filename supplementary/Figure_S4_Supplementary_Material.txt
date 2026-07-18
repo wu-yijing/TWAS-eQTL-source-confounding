@@ -1,2 +1,0 @@
-Supplementary Figure S4. |Z| Density Distribution by Group (eQTLGen Whole Blood).
-Kernel density estimates of |Z| scores under eQTLGen weights for non-candidates (blue) and T2DM controls (green) across DR, DN, and DPN. The vertical dashed line marks |Z|=1.96. DR shows a bimodal distribution for non-candidates with a secondary peak at |Z|≈10-15. DN shows right-shifted non-candidate distribution. DPN shows nearly superimposable distributions between groups.

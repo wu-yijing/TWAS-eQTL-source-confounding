@@ -1,2 +1,0 @@
-Supplementary Figure S8. Enrichment Comparison Across Gene Groups and eQTL Sources.
-Enrichment comparison bar chart showing FDR significant rates for DR, DN, and DPN across three groups (Candidate, Non-Candidate, T2DM Control) under GTEx v8 (red) and eQTLGen (blue) weights. Candidate genes show 40.7% (GTEx) to 0% (eQTLGen). Non-candidates show 33.3% (GTEx) to 65.5-75.9% (eQTLGen). T2DM controls show 21.1% (GTEx) to 50.0-62.5% (eQTLGen).
