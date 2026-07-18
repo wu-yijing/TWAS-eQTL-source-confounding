@@ -1,7 +1,7 @@
 # TWAS eQTL Source Confounding — Systematic Evaluation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21416787.svg)](https://doi.org/10.5281/zenodo.21416787)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21428347.svg)](https://doi.org/10.5281/zenodo.21428347)
 
 ## Overview
 
@@ -11,7 +11,7 @@ This repository contains analysis scripts and processed data for:
 
 Target journal: **Genetic Epidemiology** (under consideration)
 
-> The original v1.0.0 release (Zenodo [10.5281/zenodo.21416787](https://doi.org/10.5281/zenodo.21416787)) corresponded to the iScience submission titled *"eQTL source confounding systematically biases TWAS cross-population replication …"* (HOTAIR binding proteins, 104 genes, three diabetic complications). v2.0.0 adds the schizophrenia (SCZ) dual-source 2×2 decomposition replication and retargets the manuscript to Genetic Epidemiology.
+> The original v1.0.0 release (Zenodo [10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)) corresponded to the iScience submission titled *"eQTL source confounding systematically biases TWAS cross-population replication …"* (HOTAIR binding proteins, 104 genes, three diabetic complications). v2.0.0 adds the schizophrenia (SCZ) dual-source 2×2 decomposition replication and retargets the manuscript to Genetic Epidemiology.
 
 ### Core Question
 
@@ -212,13 +212,13 @@ python scripts/python/02_density_scatter_consistency.py
 
 ## Reproducibility
 
-All processed data tables are provided in `data/processed/` and `scz_replication/results/`. Analysis scripts are version-controlled in this repository under MIT license. The repository snapshot is archived at Zenodo: [https://doi.org/10.5281/zenodo.21416787](https://doi.org/10.5281/zenodo.21416787). A new Zenodo version (v2.0.0, including the SCZ replication) is minted automatically when the corresponding GitHub Release is published.
+All processed data tables are provided in `data/processed/` and `scz_replication/results/`. Analysis scripts are version-controlled in this repository under MIT license. The repository snapshot is archived at Zenodo: [https://doi.org/10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347). A new Zenodo version (v2.0.0, including the SCZ replication) is minted automatically when the corresponding GitHub Release is published.
 
 ## Citation
 
-Wu Y, Chen M, Wu Q, Zhao J, Jin G. (2026). TWAS eQTL Source Confounding — Systematic Evaluation (v1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.21416787](https://doi.org/10.5281/zenodo.21416787)
+Wu Y, Chen M, Wu Q, Zhao J, Jin G. (2026). TWAS eQTL Source Confounding — Systematic Evaluation (v1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)
 
-Wu Y, Chen M, Wu Q, Zhao J, Jin G. (2026). TWAS eQTL Source Confounding — Systematic Evaluation (v2.0.0, SCZ 2×2 decomposition replication, retargeted to Genetic Epidemiology). Zenodo. [https://doi.org/10.5281/zenodo.21416787](https://doi.org/10.5281/zenodo.21416787)
+Wu Y, Chen M, Wu Q, Zhao J, Jin G. (2026). TWAS eQTL Source Confounding — Systematic Evaluation (v2.0.0, SCZ 2×2 decomposition replication, retargeted to Genetic Epidemiology). Zenodo. [https://doi.org/10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)
 
 ## License
 
