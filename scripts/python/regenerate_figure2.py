@@ -48,8 +48,8 @@ def generate_figure2():
     comp = load_comp()
     comp = comp[comp['Z_eQTLGen'].notna() & comp['Z_GTEx'].notna()]
 
-    fig, axes = plt.subplots(1, 3, figsize=(6.69, 2.85))
-    fig.subplots_adjust(bottom=0.36, top=0.88, wspace=0.38)
+    fig, axes = plt.subplots(1, 3, figsize=(6.69, 2.90))
+    fig.subplots_adjust(bottom=0.40, top=0.88, wspace=0.38)
 
     group_colors = {
         'Candidate': C_CANDIDATE,
@@ -103,7 +103,7 @@ def generate_figure2():
                 bbox=dict(boxstyle='round,pad=0.3', facecolor='wheat', alpha=0.5))
 
     # Shared x-axis label below panels
-    fig.text(0.5, 0.27, 'Z-score (GTEx v8)', fontsize=10, ha='center', va='center')
+    fig.text(0.5, 0.30, 'Z-score (GTEx v8)', fontsize=10, ha='center', va='center')
 
     # Shared legend below the x-label, centered
     legend_handles = [
@@ -116,10 +116,10 @@ def generate_figure2():
     ]
     fig.legend(handles=legend_handles, loc='lower center', ncol=2,
                frameon=True, framealpha=0.95, fontsize=8,
-               bbox_to_anchor=(0.5, 0.17), columnspacing=1.2, handletextpad=0.3)
+               bbox_to_anchor=(0.5, 0.19), columnspacing=1.2, handletextpad=0.3)
 
     # Title below the legend, smaller font
-    fig.text(0.5, 0.07, 'Figure 2. GTEx vs eQTLGen TWAS Z-score Comparison',
+    fig.text(0.5, 0.08, 'Figure 2. GTEx vs eQTLGen TWAS Z-score Comparison',
              fontsize=11, fontweight='bold', ha='center', va='bottom')
 
     out_pdf = os.path.join(FIG_DIR, 'Figure2.pdf')
