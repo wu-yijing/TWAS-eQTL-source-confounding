@@ -112,8 +112,8 @@ def generate_figure4():
     smd_after = [-0.153, 0.091, 0.076]
 
     # Plot
-    fig, ax = plt.subplots(figsize=(4.80, 2.40))
-    fig.subplots_adjust(bottom=0.24, top=0.88, left=0.29, right=0.71)
+    fig, ax = plt.subplots(figsize=(4.80, 2.55))
+    fig.subplots_adjust(bottom=0.30, top=0.88, left=0.29, right=0.71)
     y = np.arange(len(params))
 
     ax.scatter(smd_before, y, c=C_BEFORE, marker='o', s=30, label='Before matching', zorder=5)
@@ -128,7 +128,7 @@ def generate_figure4():
 
     ax.set_yticks(y)
     ax.set_yticklabels(labels_short, fontsize=7)
-    ax.set_xlabel('Standardized Mean Difference (SMD)', fontsize=7, labelpad=8)
+    ax.set_xlabel('Standardized Mean Difference (SMD)', fontsize=7, labelpad=10)
     ax.set_xlim(-0.70, 0.70)
     ax.tick_params(axis='x', labelsize=7)
 
@@ -145,8 +145,8 @@ def generate_figure4():
         ax.text(text_x, i, f'{b:.3f}→{a:.3f}',
                 va='center', fontsize=6, alpha=0.75)
 
-    # Title centered directly below the x-axis label
-    fig.text(0.5, 0.045, 'Figure 4. Covariate Balance (Love Plot)',
+    # Title centered directly below the x-axis label, with extra spacing
+    fig.text(0.5, 0.03, 'Figure 4. Covariate Balance (Love Plot)',
              fontsize=8, fontweight='bold', ha='center', va='bottom')
 
     out_pdf = os.path.join(FIG_DIR, 'Figure4.pdf')
