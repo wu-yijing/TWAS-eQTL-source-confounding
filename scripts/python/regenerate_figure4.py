@@ -113,12 +113,12 @@ def generate_figure4():
     smd_after = [-0.153, 0.091, 0.076]
 
     # Plot
-    fig, ax = plt.subplots(figsize=(4.50, 2.55))
-    fig.subplots_adjust(bottom=0.30, top=0.88, left=0.18, right=0.68)
+    fig, ax = plt.subplots(figsize=(4.80, 2.55))
+    fig.subplots_adjust(bottom=0.30, top=0.88, left=0.18, right=0.55)
     y = np.arange(len(params))
 
-    ax.scatter(smd_before, y, c=C_BEFORE, marker='o', s=45, label='Before matching', zorder=5)
-    ax.scatter(smd_after, y, c=C_AFTER, marker='s', s=45, label='After matching', zorder=5)
+    ax.scatter(smd_before, y, c=C_BEFORE, marker='o', s=30, label='Before matching', zorder=5)
+    ax.scatter(smd_after, y, c=C_AFTER, marker='s', s=30, label='After matching', zorder=5)
 
     for i in range(len(params)):
         ax.plot([smd_before[i], smd_after[i]], [i, i], 'gray', lw=0.8, alpha=0.5)
@@ -128,26 +128,26 @@ def generate_figure4():
     ax.axvline(0.25, color='gray', linestyle=':', alpha=0.3, lw=0.5)
 
     ax.set_yticks(y)
-    ax.set_yticklabels(labels_short, fontsize=10)
-    ax.set_xlabel('Standardized Mean Difference (SMD)', fontsize=10)
-    ax.set_xlim(-0.75, 0.75)
+    ax.set_yticklabels(labels_short, fontsize=9)
+    ax.set_xlabel('Standardized Mean Difference (SMD)', fontsize=9)
+    ax.set_xlim(-0.70, 0.70)
 
-    # Legend: upper-right but lowered to avoid eQTL SNPs numeric label, smaller font
-    ax.legend(fontsize=7, loc='upper right', framealpha=0.9,
-              bbox_to_anchor=(0.98, 0.78), borderpad=0.25, labelspacing=0.15,
-              handletextpad=0.25, handlelength=1.2)
+    # Legend: upper-right outside the axes, smaller font and markers
+    ax.legend(fontsize=6, loc='upper left', framealpha=0.9,
+              bbox_to_anchor=(1.02, 1.0), borderpad=0.2, labelspacing=0.12,
+              handletextpad=0.2, handlelength=1.0)
 
-    # SMD values: place to the right, avoiding the legend
+    # SMD values: keep inside axes to the right of the points
     for i, (b, a) in enumerate(zip(smd_before, smd_after)):
-        text_x = max(b, a) + 0.28
-        if text_x > 0.70:
-            text_x = 0.70
+        text_x = max(b, a) + 0.12
+        if text_x > 0.55:
+            text_x = 0.55
         ax.text(text_x, i, f'{b:.3f}→{a:.3f}',
-                va='center', fontsize=7, alpha=0.75)
+                va='center', fontsize=6, alpha=0.75)
 
     # Title below the plot, centered, smaller font, separated from x-label
     fig.text(0.5, 0.02, 'Figure 4. Covariate Balance (Love Plot)',
-             fontsize=9, fontweight='bold', ha='center', va='bottom')
+             fontsize=8, fontweight='bold', ha='center', va='bottom')
 
     out_pdf = os.path.join(FIG_DIR, 'Figure4.pdf')
     out_png = os.path.join(FIG_DIR, 'Figure4.png')
