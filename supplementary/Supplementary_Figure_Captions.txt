@@ -1,0 +1,14 @@
+Supplementary Figure Captions
+Genetic Epidemiology (Wiley) submission - Supporting Information
+Corresponding to Figure S1-S8 in: 04_补充图_Figures_Supplementary/
+Each supplementary figure file must include a legend stating what it is (Wiley SI policy).
+======================================================================
+
+Figure S1. Mahalanobis matched-pair covariate trajectories. Visualization of 30 candidate-control matched pairs showing covariate balance before and after Mahalanobis distance matching, with standardized mean differences for gene length, GC content, and eQTL SNP count.
+Figure S2. Pull-down vs literature discovery source stratification. Comparison of FDR enrichment rates between RNA pull-down-derived and literature-curated candidate genes across three diabetic complications under eQTLGen weights, demonstrating no systematic source-dependent bias.
+Figure S3. ACAT-O sensitivity analysis comparing Stouffer and ACAT-O integration methods. Multi-tissue integration sensitivity analysis for GTEx v8 TWAS results, comparing Stouffer weighted Z-meta method versus ACAT-O p-value combination, showing minimal impact on FDR conclusions.
+Figure S4. |Z| density distribution for eQTLGen TWAS Z-scores. Density plot of absolute Z-scores from eQTLGen S-PrediXcan results, comparing candidate, non-candidate, and T2DM control gene groups.
+Figure S5. eQTL SNP count distribution across gene groups. Distribution of cis-eQTL SNP counts per gene used in the S-PrediXcan model across candidate, non-candidate, and T2DM control groups.
+Figure S6. Direction consistency sensitivity analysis. Sensitivity analysis of TWAS direction consistency between GTEx v8 and eQTLGen across different Z-score thresholds and gene group stratifications.
+Figure S7. |Z| density distribution by gene group. Group-stratified |Z| density distributions from eQTLGen TWAS results, highlighting the distributional differences between candidate, non-candidate, and control genes.
+Figure S8. FDR enrichment rates across all phenotypes and eQTL sources. Comprehensive FDR enrichment comparison across all three diabetic complications (DR, DN, DPN) and both eQTL sources (GTEx v8, eQTLGen), with group-stratified enrichment rates.
