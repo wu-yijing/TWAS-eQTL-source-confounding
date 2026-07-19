@@ -113,7 +113,7 @@ def generate_figure4():
 
     # Plot
     fig, ax = plt.subplots(figsize=(4.80, 2.55))
-    fig.subplots_adjust(bottom=0.30, top=0.88, left=0.29, right=0.71)
+    fig.subplots_adjust(bottom=0.30, top=0.82, left=0.29, right=0.71)
     y = np.arange(len(params))
 
     ax.scatter(smd_before, y, c=C_BEFORE, marker='o', s=30, label='Before matching', zorder=5)
@@ -132,9 +132,9 @@ def generate_figure4():
     ax.set_xlim(-0.70, 0.70)
     ax.tick_params(axis='x', labelsize=7)
 
-    # Legend: shrunk and placed above the data in the upper-right corner
+    # Legend: shrunk and placed outside the axes in the upper-right corner
     ax.legend(fontsize=4.5, loc='upper right', framealpha=0.9,
-              bbox_to_anchor=(0.98, 1.20), borderpad=0.12, labelspacing=0.08,
+              bbox_to_anchor=(1.20, 1.10), borderpad=0.12, labelspacing=0.08,
               handletextpad=0.12, handlelength=0.7, markerscale=0.5)
 
     # SMD values: keep inside axes to the right of the points
