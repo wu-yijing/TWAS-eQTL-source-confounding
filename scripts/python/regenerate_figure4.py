@@ -114,7 +114,7 @@ def generate_figure4():
 
     # Plot
     fig, ax = plt.subplots(figsize=(4.80, 2.60))
-    fig.subplots_adjust(bottom=0.34, top=0.88, left=0.18, right=0.55)
+    fig.subplots_adjust(bottom=0.35, top=0.88, left=0.18, right=0.55)
     y = np.arange(len(params))
 
     ax.scatter(smd_before, y, c=C_BEFORE, marker='o', s=30, label='Before matching', zorder=5)
@@ -145,8 +145,8 @@ def generate_figure4():
         ax.text(text_x, i, f'{b:.3f}→{a:.3f}',
                 va='center', fontsize=6, alpha=0.75)
 
-    # Title directly below the x-axis label, centered
-    fig.text(0.5, 0.015, 'Figure 4. Covariate Balance (Love Plot)',
+    # Title centered below the x-axis label, at the bottom of the figure
+    fig.text(0.5, 0.01, 'Figure 4. Covariate Balance (Love Plot)',
              fontsize=10, fontweight='bold', ha='center', va='bottom')
 
     out_pdf = os.path.join(FIG_DIR, 'Figure4.pdf')
