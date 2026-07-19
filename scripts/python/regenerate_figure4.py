@@ -113,7 +113,7 @@ def generate_figure4():
 
     # Plot
     fig, ax = plt.subplots(figsize=(4.80, 2.40))
-    fig.subplots_adjust(bottom=0.24, top=0.88, left=0.22, right=0.64)
+    fig.subplots_adjust(bottom=0.24, top=0.88, left=0.29, right=0.71)
     y = np.arange(len(params))
 
     ax.scatter(smd_before, y, c=C_BEFORE, marker='o', s=30, label='Before matching', zorder=5)
@@ -128,14 +128,14 @@ def generate_figure4():
 
     ax.set_yticks(y)
     ax.set_yticklabels(labels_short, fontsize=7)
-    ax.set_xlabel('', fontsize=7)  # x-label handled by fig.text for figure-level centering
+    ax.set_xlabel('Standardized Mean Difference (SMD)', fontsize=7, labelpad=8)
     ax.set_xlim(-0.70, 0.70)
     ax.tick_params(axis='x', labelsize=7)
 
-    # Legend: shrunk and placed in the upper-right corner outside the axes
-    ax.legend(fontsize=5, loc='upper left', framealpha=0.9,
-              bbox_to_anchor=(1.01, 1.0), borderpad=0.15, labelspacing=0.10,
-              handletextpad=0.15, handlelength=0.8, markerscale=0.6)
+    # Legend: shrunk and placed above the data in the upper-right corner
+    ax.legend(fontsize=4.5, loc='upper right', framealpha=0.9,
+              bbox_to_anchor=(0.98, 1.20), borderpad=0.12, labelspacing=0.08,
+              handletextpad=0.12, handlelength=0.7, markerscale=0.5)
 
     # SMD values: keep inside axes to the right of the points
     for i, (b, a) in enumerate(zip(smd_before, smd_after)):
@@ -144,10 +144,6 @@ def generate_figure4():
             text_x = 0.55
         ax.text(text_x, i, f'{b:.3f}→{a:.3f}',
                 va='center', fontsize=6, alpha=0.75)
-
-    # X-axis label centered at figure level, directly above the title
-    fig.text(0.5, 0.115, 'Standardized Mean Difference (SMD)',
-             fontsize=7, ha='center', va='center')
 
     # Title centered directly below the x-axis label
     fig.text(0.5, 0.045, 'Figure 4. Covariate Balance (Love Plot)',
