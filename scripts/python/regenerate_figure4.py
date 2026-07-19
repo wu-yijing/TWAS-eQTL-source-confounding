@@ -128,8 +128,8 @@ def generate_figure4():
     ax.axvline(0.25, color='gray', linestyle=':', alpha=0.3, lw=0.5)
 
     ax.set_yticks(y)
-    ax.set_yticklabels(labels_short, fontsize=9)
-    ax.set_xlabel('Standardized Mean Difference (SMD)', fontsize=9)
+    ax.set_yticklabels(labels_short, fontsize=8)
+    ax.set_xlabel('Standardized Mean Difference (SMD)', fontsize=8)
     ax.set_xlim(-0.70, 0.70)
 
     # Legend: upper-right outside the axes, smaller font and markers
@@ -145,9 +145,9 @@ def generate_figure4():
         ax.text(text_x, i, f'{b:.3f}→{a:.3f}',
                 va='center', fontsize=6, alpha=0.75)
 
-    # Title below the plot, centered, smaller font, separated from x-label
+    # Title below the plot, centered, slightly larger than axis labels
     fig.text(0.5, 0.02, 'Figure 4. Covariate Balance (Love Plot)',
-             fontsize=8, fontweight='bold', ha='center', va='bottom')
+             fontsize=10, fontweight='bold', ha='center', va='bottom')
 
     out_pdf = os.path.join(FIG_DIR, 'Figure4.pdf')
     out_png = os.path.join(FIG_DIR, 'Figure4.png')
