@@ -25,7 +25,6 @@ plt.rcParams.update({
     'legend.fontsize': 8,
     'figure.dpi': 150,
     'savefig.dpi': 300,
-    'savefig.bbox': 'tight',
     'axes.unicode_minus': False,
 })
 
@@ -113,8 +112,8 @@ def generate_figure4():
     smd_after = [-0.153, 0.091, 0.076]
 
     # Plot
-    fig, ax = plt.subplots(figsize=(4.80, 2.60))
-    fig.subplots_adjust(bottom=0.35, top=0.88, left=0.18, right=0.55)
+    fig, ax = plt.subplots(figsize=(4.80, 2.40))
+    fig.subplots_adjust(bottom=0.24, top=0.88, left=0.18, right=0.60)
     y = np.arange(len(params))
 
     ax.scatter(smd_before, y, c=C_BEFORE, marker='o', s=30, label='Before matching', zorder=5)
@@ -129,13 +128,13 @@ def generate_figure4():
 
     ax.set_yticks(y)
     ax.set_yticklabels(labels_short, fontsize=8)
-    ax.set_xlabel('Standardized Mean Difference (SMD)', fontsize=8)
+    ax.set_xlabel('Standardized Mean Difference (SMD)', fontsize=7)
     ax.set_xlim(-0.70, 0.70)
 
-    # Legend: upper-right outside the axes, smaller font and markers
-    ax.legend(fontsize=6, loc='upper left', framealpha=0.9,
-              bbox_to_anchor=(1.02, 1.0), borderpad=0.2, labelspacing=0.12,
-              handletextpad=0.2, handlelength=1.0)
+    # Legend: shrunk and placed in the upper-right corner outside the axes
+    ax.legend(fontsize=5, loc='upper left', framealpha=0.9,
+              bbox_to_anchor=(1.01, 1.0), borderpad=0.15, labelspacing=0.10,
+              handletextpad=0.15, handlelength=0.8, markerscale=0.6)
 
     # SMD values: keep inside axes to the right of the points
     for i, (b, a) in enumerate(zip(smd_before, smd_after)):
@@ -145,9 +144,9 @@ def generate_figure4():
         ax.text(text_x, i, f'{b:.3f}→{a:.3f}',
                 va='center', fontsize=6, alpha=0.75)
 
-    # Title centered below the x-axis label, at the bottom of the figure
-    fig.text(0.5, 0.01, 'Figure 4. Covariate Balance (Love Plot)',
-             fontsize=10, fontweight='bold', ha='center', va='bottom')
+    # Title centered directly below the x-axis label
+    fig.text(0.5, 0.045, 'Figure 4. Covariate Balance (Love Plot)',
+             fontsize=8, fontweight='bold', ha='center', va='bottom')
 
     out_pdf = os.path.join(FIG_DIR, 'Figure4.pdf')
     out_png = os.path.join(FIG_DIR, 'Figure4.png')
