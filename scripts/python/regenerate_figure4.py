@@ -127,9 +127,10 @@ def generate_figure4():
     ax.axvline(0.25, color='gray', linestyle=':', alpha=0.3, lw=0.5)
 
     ax.set_yticks(y)
-    ax.set_yticklabels(labels_short, fontsize=8)
+    ax.set_yticklabels(labels_short, fontsize=7)
     ax.set_xlabel('', fontsize=7)  # x-label handled by fig.text for figure-level centering
     ax.set_xlim(-0.70, 0.70)
+    ax.tick_params(axis='x', labelsize=7)
 
     # Legend: shrunk and placed in the upper-right corner outside the axes
     ax.legend(fontsize=5, loc='upper left', framealpha=0.9,
