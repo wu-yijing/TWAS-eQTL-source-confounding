@@ -36,13 +36,13 @@ def load_data():
     covar = pd.read_csv(os.path.join(DATA_DIR, 'covariate_matrix.csv'))
     covar['Group'] = covar['Group'].astype(str).str.replace(' ', '_', regex=False).replace({
         '30_HOTAIR_Candidate': 'Candidate',
-        '39_NonCandidate_HOTAIR': 'NonCandidate',
+        '44_NonCandidate_HOTAIR': 'NonCandidate',
         '30_T2DM_Control': 'T2DM_Control',
     })
     matches = pd.read_csv(os.path.join(DATA_DIR, 'mahalanobis_matched_pairs.csv'))
     matches['Group'] = matches['Group'].replace({
         '30_HOTAIR_Candidate': 'Candidate',
-        '39_NonCandidate_HOTAIR': 'NonCandidate',
+        '44_NonCandidate_HOTAIR': 'NonCandidate',
         '30_T2DM_Control': 'T2DM_Control',
         'Background': 'Background',
     })

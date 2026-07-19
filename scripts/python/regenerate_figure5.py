@@ -41,7 +41,7 @@ def load_data():
     eqtlgen = pd.read_csv(os.path.join(DATA_DIR, 'eqtlgen_spredixcan_results.csv'))
     eqtlgen['Group'] = eqtlgen['Group'].replace({
         '30_HOTAIR_Candidate': 'Candidate',
-        '39_NonCandidate_HOTAIR': 'NonCandidate',
+        '44_NonCandidate_HOTAIR': 'NonCandidate',
         '30_T2DM_Control': 'T2DM_Control',
     })
     rnh1_gtex = {

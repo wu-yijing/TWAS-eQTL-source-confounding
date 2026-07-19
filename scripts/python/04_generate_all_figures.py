@@ -67,7 +67,7 @@ def load_data():
     covar = pd.read_csv(os.path.join(DATA_DIR, 'covariate_matrix.csv'))
     covar['Group'] = covar['Group'].astype(str).str.replace(' ', '_', regex=False).replace({
         '30_HOTAIR_Candidate': 'Candidate',
-        '39_NonCandidate_HOTAIR': 'NonCandidate',
+        '44_NonCandidate_HOTAIR': 'NonCandidate',
         '30_T2DM_Control': 'T2DM_Control'
     })
     data['covar'] = covar
@@ -76,7 +76,7 @@ def load_data():
     comp = pd.read_csv(os.path.join(DATA_DIR, 'eqtlgen_vs_gtex_comparison.csv'))
     comp['Group'] = comp['Group'].replace({
         '30_HOTAIR_Candidate': 'Candidate',
-        '39_NonCandidate_HOTAIR': 'NonCandidate',
+        '44_NonCandidate_HOTAIR': 'NonCandidate',
         '30_T2DM_Control': 'T2DM_Control'
     })
     data['comp'] = comp
@@ -85,7 +85,7 @@ def load_data():
     eqtlgen = pd.read_csv(os.path.join(DATA_DIR, 'eqtlgen_spredixcan_results.csv'))
     eqtlgen['Group'] = eqtlgen['Group'].replace({
         '30_HOTAIR_Candidate': 'Candidate',
-        '39_NonCandidate_HOTAIR': 'NonCandidate',
+        '44_NonCandidate_HOTAIR': 'NonCandidate',
         '30_T2DM_Control': 'T2DM_Control'
     })
     data['eqtlgen'] = eqtlgen
@@ -96,7 +96,7 @@ def load_data():
         if col in enrich.columns:
             enrich[col] = enrich[col].replace({
                 '30_HOTAIR_Candidate': 'Candidate',
-                '39_NonCandidate_HOTAIR': 'NonCandidate',
+                '44_NonCandidate_HOTAIR': 'NonCandidate',
                 '30_T2DM_Control': 'T2DM_Control'
             })
     data['enrich'] = enrich
@@ -105,7 +105,7 @@ def load_data():
     matches = pd.read_csv(os.path.join(DATA_DIR, 'mahalanobis_matched_pairs.csv'))
     matches['Group'] = matches['Group'].replace({
         '30_HOTAIR_Candidate': 'Candidate',
-        '39_NonCandidate_HOTAIR': 'NonCandidate',
+        '44_NonCandidate_HOTAIR': 'NonCandidate',
         '30_T2DM_Control': 'T2DM_Control',
         'Background': 'Background'
     })
@@ -115,7 +115,7 @@ def load_data():
     cand_dr = pd.read_csv(os.path.join(DATA_DIR, 'candidate_comparison_DR.csv'))
     cand_dr['Group'] = cand_dr['Group'].replace({
         '30_HOTAIR_Candidate': 'Candidate',
-        '39_NonCandidate_HOTAIR': 'NonCandidate',
+        '44_NonCandidate_HOTAIR': 'NonCandidate',
         '30_T2DM_Control': 'T2DM_Control'
     })
     data['cand_dr'] = cand_dr
@@ -128,7 +128,7 @@ def load_data():
     viz = pd.read_csv(os.path.join(DATA_DIR, 'viz_z_distribution.csv'))
     viz['Group'] = viz['Group'].replace({
         '30_HOTAIR_Candidate': 'Candidate',
-        '39_NonCandidate_HOTAIR': 'NonCandidate',
+        '44_NonCandidate_HOTAIR': 'NonCandidate',
         '30_T2DM_Control': 'T2DM_Control'
     })
     data['viz'] = viz

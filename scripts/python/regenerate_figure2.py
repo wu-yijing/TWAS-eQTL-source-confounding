@@ -37,7 +37,7 @@ def load_comp():
     comp = pd.read_csv(os.path.join(DATA_DIR, 'eqtlgen_vs_gtex_comparison.csv'))
     comp['Group'] = comp['Group'].replace({
         '30_HOTAIR_Candidate': 'Candidate',
-        '39_NonCandidate_HOTAIR': 'NonCandidate',
+        '44_NonCandidate_HOTAIR': 'NonCandidate',
         '30_T2DM_Control': 'T2DM_Control',
         'Non-Candidate': 'NonCandidate',
         'T2DM Control': 'T2DM_Control',
