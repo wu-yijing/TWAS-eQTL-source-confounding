@@ -7,11 +7,11 @@
 
 This repository contains analysis scripts and processed data for:
 
-**"eQTL source confounding in TWAS: a dual-source 2×2 decomposition"**
+**"Quantifying eQTL source confounding in TWAS: A dual-source 2×2 decomposition framework and its implications for cross-population replication"**
 
-Target journal: **Genetic Epidemiology** (under consideration)
+Status: code & data release accompanying the manuscript; target journal to be finalized at submission.
 
-> The original v1.0.0 release (Zenodo [10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)) corresponded to the iScience submission titled *"eQTL source confounding systematically biases TWAS cross-population replication …"* (HOTAIR binding proteins, 104 genes, three diabetic complications). v2.0.0 adds the schizophrenia (SCZ) dual-source 2×2 decomposition replication and retargets the manuscript to Genetic Epidemiology.
+> The original v1.0.0 release (Zenodo [10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)) corresponded to the iScience submission titled *"eQTL source confounding systematically biases TWAS cross-population replication …"* (HOTAIR binding proteins, 104 genes, three diabetic complications). v2.0.0 adds the schizophrenia (SCZ) dual-source 2×2 decomposition replication and prepares the manuscript for journal submission.
 
 ### Core Question
 
@@ -163,7 +163,7 @@ scz_replication/
     ├── scz_robustness.json     # stratified robustness + CI
     └── scz_twas_results_limit0.csv  # per-gene TWAS Z (10,357 genes)
 ```
-Manuscript (GE-retitled) and cover letter: `manuscript/`. SCZ figures: `figures/scz/`.
+Manuscript and cover letter: `manuscript/`. SCZ figures: `figures/scz/`.
 
 > Large intermediates (`weights.db`, extracted eQTLGen RDat weights, raw GWAS) are excluded by `.gitignore`; regenerate via the scripts above.
 
@@ -218,7 +218,7 @@ All processed data tables are provided in `data/processed/` and `scz_replication
 
 Wu Y, Chen M, Wu Q, Zhao J, Jin G. (2026). TWAS eQTL Source Confounding — Systematic Evaluation (v1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)
 
-Wu Y, Chen M, Wu Q, Zhao J, Jin G. (2026). TWAS eQTL Source Confounding — Systematic Evaluation (v2.0.0, SCZ 2×2 decomposition replication, retargeted to Genetic Epidemiology). Zenodo. [https://doi.org/10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)
+Wu Y, Chen M, Wu Q, Zhao J, Jin G. (2026). TWAS eQTL Source Confounding — Systematic Evaluation (v2.0.0, SCZ 2×2 decomposition replication). Zenodo. [https://doi.org/10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)
 
 ## License
 

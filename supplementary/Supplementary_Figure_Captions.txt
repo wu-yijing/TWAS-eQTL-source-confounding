@@ -1,7 +1,7 @@
 Supplementary Figure Captions
-Genetic Epidemiology (Wiley) submission - Supporting Information
+Supplementary Information
 Corresponding to Figure S1-S8 in: 04_补充图_Figures_Supplementary/
-Each supplementary figure file must include a legend stating what it is (Wiley SI policy).
+Each supplementary figure file must include a legend stating what it is.
 ======================================================================
 
 Figure S1. Mahalanobis matched-pair covariate trajectories. Visualization of 30 candidate-control matched pairs showing covariate balance before and after Mahalanobis distance matching, with standardized mean differences for gene length, GC content, and eQTL SNP count.
