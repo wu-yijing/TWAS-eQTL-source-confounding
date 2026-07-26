@@ -1,0 +1,33 @@
+{
+  "N_primary_pairs": 2511,
+  "genome_wide_direction_consistency_pct": 68.26,
+  "genome_wide_bootstrap_ci95_pct": [
+    66.43,
+    70.05
+  ],
+  "cutpoint_position_in_bootstrap": {
+    "P_bootstrap_le_60pct": 0.0,
+    "P_bootstrap_le_75pct": 100.0
+  },
+  "n104_subset_distribution_pct": {
+    "2.5": 59.6,
+    "5": 60.6,
+    "25": 65.4,
+    "50": 68.3,
+    "75": 71.2,
+    "95": 76.0,
+    "97.5": 76.9
+  },
+  "n104_fraction_below_60": 0.0384,
+  "n104_fraction_above_75": 0.0545,
+  "genome_wide_bootstrap_percentiles_pct": {
+    "2.5": 66.4,
+    "5": 66.7,
+    "25": 67.6,
+    "50": 68.3,
+    "75": 68.9,
+    "95": 69.8,
+    "97.5": 70.1
+  },
+  "interpretation": "At genome-wide N the primary-axis direction consistency is ~68.3% with a tight bootstrap CI, whereas a 104-gene study spans roughly 60-77% (central 95%), confirming the 60/75 bands are exploratory and must be read as sampling-variable at small n."
+}

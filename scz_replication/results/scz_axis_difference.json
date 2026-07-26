@@ -1,0 +1,46 @@
+{
+  "N_complete_case": 2511,
+  "B_bootstrap": 10000,
+  "seed": 20260726,
+  "source_axis": {
+    "definition": "eQTLGen WB vs GTEx multi-tissue Stouffer",
+    "rho": 0.5222,
+    "rho_ci95": [
+      0.4901,
+      0.5531
+    ],
+    "dir_consistency": 0.6826
+  },
+  "tissue_axis": {
+    "definition": "GTEx WB vs GTEx Nerve_Tibial",
+    "rho": 0.5088,
+    "rho_ci95": [
+      0.4713,
+      0.545
+    ],
+    "dir_consistency": 0.7121
+  },
+  "axis_difference": {
+    "delta_rho": 0.0134,
+    "delta_rho_ci95": [
+      -0.0285,
+      0.055
+    ],
+    "delta_rho_p_twosided": 0.5304,
+    "delta_dir_consistency_pp": -2.95,
+    "delta_dir_consistency_ci95_pp": [
+      -5.3,
+      -0.6
+    ],
+    "delta_dir_consistency_p_twosided": 0.0152
+  },
+  "primary_axis": {
+    "definition": "GTEx multi-tissue vs eQTLGen (headline discordance)",
+    "rho": 0.5222,
+    "rho_ci95": [
+      0.4893,
+      0.5532
+    ],
+    "dir_consistency": 0.6826
+  }
+}
