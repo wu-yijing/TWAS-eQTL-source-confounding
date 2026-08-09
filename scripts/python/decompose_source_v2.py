@@ -6,9 +6,11 @@ and splits the discordance into tissue-only (1D) vs panel-only (1D) components.
 import csv, os, json
 from scipy import stats
 
-BASE = r"E:/workbuddy/GigaScience投稿/投稿所需资料/additional_files/data"
-ALT  = r"E:/workbuddy/GigaScience投稿/gigidata数据上传文件"
-TABLES = r"E:/workbuddy/GigaScience投稿/2026-07-04_figures_supplement备份/tables"
+# Use repository-relative paths for portability
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+BASE = os.path.join(REPO_ROOT, 'data', 'processed')
+ALT  = os.path.join(REPO_ROOT, 'data', 'processed')
+TABLES = os.path.join(REPO_ROOT, 'tables')
 
 def load_dict(path, keycols, valcol, cast=float):
     d = {}
@@ -103,7 +105,7 @@ summary = {
     "anchor_2D_rho": round(rho2,3), "anchor_2D_consistency": round(cons2*100,1),
     "arms": [a_panel, a_tissue, a_2d]
 }
-with open(r"E:/workbuddy/2026-07-15-20-17-22/decomposition_results_v2.json", "w", encoding="utf-8") as f:
+with open(os.path.join(REPO_ROOT, "analyses", "decomposition_results_v2.json"), "w", encoding="utf-8") as f:
     json.dump(summary, f, indent=2, ensure_ascii=False)
 
 print("\n" + "="*70)

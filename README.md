@@ -19,17 +19,20 @@ Does the choice of eQTL weight source (GTEx v8 tissue-specific vs. eQTLGen large
 
 ### Key Findings
 
-| Metric | Value |
-|--------|-------|
-| Total genes analyzed | 104 (30 candidate + 44 non-candidate + 30 T2DM control) |
-| Spearman ρ (GTEx vs eQTLGen Z-scores) | 0.289 |
-| Direction consistency (all pairs) | 59.5% |
-| Direction consistency (candidate genes only) | 37.5% |
-| GTEx FDR rate (candidate) | 40.7% |
-| eQTLGen FDR rate (candidate) | 0% |
-| RNH1 GTEx Z-score | +8.50 (FDR q=1.5×10⁻¹⁵) |
-| RNH1 eQTLGen Z-score | +1.18 (P=0.237) |
-| Cross-population I² (RNH1, 3 cohorts) | 95.0% |
+> **Note (2026-08-09):** The table below reflects the **v2.0.0** analysis (current manuscript version). The original v1.0.0 (iScience submission) used a different analysis pipeline that produced different FDR rates and gene-level Z-scores; those earlier values have been superseded. FDR enrichment rates are phenotype-dependent and are shown for diabetic retinopathy (DR) as the representative phenotype; see `data/processed/enrichment_comparison.csv` for all phenotypes. The direction-consistency and FDR metrics are computed from small curated gene sets (n≈16–33 per group) and should be interpreted with appropriate caution regarding sampling variability.
+
+| Metric | Value | Notes |
+|--------|-------|-------|
+| Total genes analyzed | 104 (30 candidate + 44 non-candidate + 30 T2DM control) | 114 records in covariate matrix (includes variants) |
+| Spearman ρ (GTEx vs eQTLGen Z-scores) | 0.29 | 102 gene–phenotype pairs; binomial test P = 0.06 for direction consistency |
+| Direction consistency (all pairs) | 59.5% | Varies by phenotype (DR 61.8%, DN 58.8%, DPN 58.8%) |
+| Direction consistency (candidate genes only) | ~60% (varies by phenotype) | Ribosomal vs non-ribosomal genes: similar rates (~60%) |
+| GTEx FDR rate (candidate, DR) | 48.1% (13/27) | GTEx v8 MASHR, multi-tissue Stouffer integration |
+| eQTLGen FDR rate (candidate, DR) | 71.4% (20/28) | Higher than GTEx due to larger sample/SNP coverage |
+| RNH1 GTEx Z-score (DR, Nerve_Tibial) | +13.82 | S-PrediXcan; from sparse MASHR model (2 SNPs) |
+| RNH1 eQTLGen Z-score (DR) | +11.62 | Consistent signal across both eQTL sources |
+| Cross-population I² (RNH1, 3 cohorts) | 95.0% | Source-consistent but cross-population heterogeneous |
+| SCZ replication (n=2,511 pairs) | 68.3% direction consistency | Axis difference not significant (bootstrap P = 0.530) |
 
 ## SCZ 2×2 Decomposition Replication (added in v2.0.0)
 

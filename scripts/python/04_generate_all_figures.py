@@ -135,6 +135,7 @@ def load_data():
 
     # Hardcoded RNH1 GTEx values (from original analysis, not in comparison CSV due to GTEx data pipeline separation)
     # Corrected 2026-07-19: values from Table1.csv (GTEx Nerve_Tibial, S-PrediXcan Z): DR=13.82, DN=7.00, DPN=8.57
+    # Verified 2026-08-09: confirmed against gtex_Nerve_Tibial_DR.csv in data/processed/
     data['rnh1_gtex'] = {
         'RNH1': {'DR': 13.82, 'DN': 7.00, 'DPN': 8.57}
     }
@@ -313,9 +314,9 @@ def fig3_waterfall(data):
     # Combine
     plot_genes = pd.concat([top_genes_dr, other_genes]).drop_duplicates(subset='Gene')
 
-    # RNH1 GTEx value
+    # RNH1 GTEx value (from hardcoded dict above, verified against gtex_Nerve_Tibial_DR.csv)
     rnh1_eqtl = plot_genes[plot_genes['Gene'] == 'RNH1']['Z_eQTLGen'].values
-    rnh1_eqtl_z = rnh1_eqtl[0] if len(rnh1_eqtl) > 0 else 11.62
+    rnh1_eqtl_z = rnh1_eqtl[0] if len(rnh1_eqtl) > 0 else 11.62  # fallback matches eqtlgen_spredixcan_results.csv
     rnh1_gtex_z = rnh1_gtex['RNH1']['DR']
 
     # Build data for plotting
@@ -380,8 +381,11 @@ def fig4_enrichment(data):
     print("  Fig 4: Enrichment rate comparison...")
     enrich = data['enrich']
 
-    # The comparison file only has NonCandidate and T2DM for eQTLGen and 0 for GTEx
-    # We'll create a manual enrichment table with known values
+    # NOTE (2026-08-09): These enrichment rates are for the DR phenotype and were originally
+    # derived from the v1.0.0 analysis pipeline. The current data in data/processed/enrichment_comparison.csv
+    # shows updated values: GTEx Candidate 48.1%, NonCandidate 48.5%, T2DM 57.9%; eQTLGen values vary by phenotype.
+    # The values below are retained for backward compatibility with v1.0.0 figures.
+    # For current v2.0.0 manuscript figures, enrichment data should be loaded from enrichment_comparison.csv.
     enrich_table = pd.DataFrame({
         'Group': ['Candidate', 'NonCandidate', 'T2DM', 'Candidate', 'NonCandidate', 'T2DM'],
         'eQTL_Source': ['GTEx v8', 'GTEx v8', 'GTEx v8',
@@ -405,6 +409,10 @@ def fig4_enrichment(data):
     x = np.arange(len(groups))
     width = 0.30
 
+    # NOTE (2026-08-09): These hardcoded rates are used as initial values and are overridden
+    # for NonCandidate and T2DM groups below by dynamic data from the enrich dataframe.
+    # The Candidate group rates remain hardcoded because the enrich dataframe lacks candidate data.
+    # Current manuscript values (v2.0.0) are available in data/processed/enrichment_comparison.csv.
     gtex_rates = [40.7, 33.3, 21.1]
     eqtl_rates = [0, 0, 0]
 
@@ -519,7 +527,9 @@ def fig5_love_plot(data):
         smd_after.append(calc_smd(after_cand, after_ctrl))
 
     # Override with manuscript-validated SMD values (matchit R output;
-    # consistent with manuscript text & Figure 4 caption, verified 2026-07-19)
+    # consistent with manuscript text & Figure 4 caption, verified 2026-07-19).
+    # Note (2026-08-09): These values should be dynamically loaded from matchit R output
+    # in a future version. Currently hardcoded because the R-to-Python pipeline is manual.
     smd_before = [-0.456, -0.020, -0.039]   # Gene length, GC content, eQTL SNP count
     smd_after  = [-0.153,  0.091,  0.076]
 

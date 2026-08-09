@@ -14,15 +14,16 @@ plt.rcParams['font.family'] = 'sans-serif'
 plt.rcParams['font.sans-serif'] = ['Arial']
 plt.rcParams['axes.unicode_minus'] = False
 
-BASE = r"E:\workbuddy\car dia 投稿资料"
-RE_DESIGN = os.path.join(BASE, "重新设计方案")
-OUTPUT = r"E:\workbuddy\2026-06-27-15-13-34"
+# Use repository-relative paths for portability
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+DATA_DIR = os.path.join(REPO_ROOT, 'data', 'processed')
+OUTPUT = os.path.join(REPO_ROOT, 'analyses')
 
-# 读取数据
-covar = pd.read_csv(os.path.join(BASE, r"2.候选蛋白协变量s-prediXan\Table_S1_Covariate_Matrix_FINAL_v2.csv"))
-matches = pd.read_csv(os.path.join(RE_DESIGN, r"3.富集分析基础数据不完整 + 协变量不匹配\mahalanobis_matched_pairs.csv"))
-comp = pd.read_csv(os.path.join(RE_DESIGN, r"3.富集分析基础数据不完整 + 协变量不匹配\eqtlgen_vs_gtex_comparison.csv"))
-eqtlgen = pd.read_csv(os.path.join(RE_DESIGN, r"3.富集分析基础数据不完整 + 协变量不匹配\eqtlgen_spredixcan_results.csv"))
+# 读取数据 — use repo data/processed/ files where available
+covar = pd.read_csv(os.path.join(DATA_DIR, "covariate_matrix.csv"))
+matches = pd.read_csv(os.path.join(DATA_DIR, "mahalanobis_matched_pairs.csv"))
+comp = pd.read_csv(os.path.join(DATA_DIR, "eqtlgen_vs_gtex_comparison.csv"))
+eqtlgen = pd.read_csv(os.path.join(DATA_DIR, "eqtlgen_spredixcan_results.csv"))
 
 # ====== Fig 1: Love Plot (简化版) ======
 print("  Fig 1: Love Plot...")

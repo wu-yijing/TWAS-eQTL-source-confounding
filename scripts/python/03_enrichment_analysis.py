@@ -17,9 +17,13 @@ from scipy.stats import fisher_exact, spearmanr, binomtest as binom_test
 from statsmodels.stats.multitest import multipletests
 
 # ========== 路径设置 ==========
-BASE = r"E:\workbuddy\car dia 投稿资料"
-RE_DESIGN = os.path.join(BASE, "重新设计方案")
-OUTPUT = r"E:\workbuddy\2026-06-27-15-13-34"
+# Use repository-relative paths for portability
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+DATA_DIR = os.path.join(REPO_ROOT, 'data', 'processed')
+OUTPUT = os.path.join(REPO_ROOT, 'analyses')
+
+# Check for external data (not in repo) — fall back to repo data if unavailable
+# Raw GWAS/TWAS inputs are excluded from repo (too large); processed intermediates are in data/processed/
 
 # ========== 1. 读取数据 ==========
 print("=" * 60)
@@ -27,34 +31,48 @@ print("1. 读取全部数据源")
 print("=" * 60)
 
 # 1a. 协变量表 (所有基因的分组/长度/GC/Source)
-covar = pd.read_csv(os.path.join(BASE, r"2.候选蛋白协变量s-prediXan\Table_S1_Covariate_Matrix_FINAL_v2.csv"))
+# Note: original source file not in repo; use covariate_matrix.csv from data/processed/ as substitute
+covar = pd.read_csv(os.path.join(DATA_DIR, "covariate_matrix.csv"))
 print(f"  协变量表: {len(covar)} 行, {list(covar.columns)}")
 print(f"  分组: {covar['Group'].value_counts().to_dict()}")
 
 # 1b. GTEx 多组织整合 TWAS
-gtex_int = pd.read_csv(os.path.join(BASE, r"4.TWAS跑对照\R13_TWAS_Extension_integrated.csv"))
+# External data: requires S-PrediXcan output. Use repo gtex_stouffer_integrated.csv if available.
+gtex_int_path = os.path.join(DATA_DIR, "gtex_stouffer_integrated.csv")
+if os.path.exists(gtex_int_path):
+    gtex_int = pd.read_csv(gtex_int_path)
+else:
+    print(f"  WARNING: GTEx integrated TWAS data not found at {gtex_int_path}")
+    print(f"  Run run_spredixcan.sh first to generate S-PrediXcan outputs.")
+    gtex_int = pd.DataFrame()
 print(f"  GTEx 整合 TWAS: {len(gtex_int)} 行")
 
 # 1c. GTEx 单组织 TWAS
-gtex_per = pd.read_csv(os.path.join(BASE, r"4.TWAS跑对照\R13_TWAS_Extension_per_tissue.csv"))
-print(f"  GTEx 单组织 TWAS: {len(gtex_per)} 行")
+# External data: requires S-PrediXcan per-tissue output
+gtex_per = pd.DataFrame()  # placeholder — load from external S-PrediXcan output if available
+print(f"  GTEx 单组织 TWAS: {len(gtex_per)} 行 (requires external S-PrediXcan output)")
 
 # 1d. eQTLGen S-PrediXcan 完整结果
-eqtlgen = pd.read_csv(os.path.join(RE_DESIGN, r"3.富集分析基础数据不完整 + 协变量不匹配\eqtlgen_spredixcan_results.csv"))
+eqtlgen = pd.read_csv(os.path.join(DATA_DIR, "eqtlgen_spredixcan_results.csv"))
 print(f"  eQTLGen TWAS: {len(eqtlgen)} 行")
 print(f"  eQTLGen 表型: {eqtlgen['Trait'].unique()}")
 
 # 1e. eQTLGen vs GTEx 比较
-comp = pd.read_csv(os.path.join(RE_DESIGN, r"3.富集分析基础数据不完整 + 协变量不匹配\eqtlgen_vs_gtex_comparison.csv"))
+comp = pd.read_csv(os.path.join(DATA_DIR, "eqtlgen_vs_gtex_comparison.csv"))
 print(f"  eQTLGen vs GTEx 比较: {len(comp)} 行")
 
 # 1f. Mahalanobis 匹配对
-matches = pd.read_csv(os.path.join(RE_DESIGN, r"3.富集分析基础数据不完整 + 协变量不匹配\mahalanobis_matched_pairs.csv"))
+matches = pd.read_csv(os.path.join(DATA_DIR, "mahalanobis_matched_pairs.csv"))
 print(f"  Mahalanobis 匹配: {len(matches)} 行")
 print(f"  匹配列: {list(matches.columns)}")
 
 # 1g. eQTLGen DR 敏感性分析（原结果）
-eqtlgen_dr = pd.read_csv(os.path.join(RE_DESIGN, "解决 eQTL 混杂问题结果.csv"))
+# Note: external file not in repo; placeholder
+eqtlgen_dr_path = os.path.join(DATA_DIR, "candidate_comparison_DR.csv")
+if os.path.exists(eqtlgen_dr_path):
+    eqtlgen_dr = pd.read_csv(eqtlgen_dr_path)
+else:
+    eqtlgen_dr = pd.DataFrame()
 print(f"  eQTLGen DR 敏分: {len(eqtlgen_dr)} 行")
 
 # ========== 2. 整合 eQTLGen 结果，添加分组信息 ==========
@@ -405,7 +423,8 @@ for _, r in gtex_enrich.iterrows():
 
 report += f"""
 > ℹ️ **注意**: GTEx 富集率仅计算了非候选和 T2DM 组，因为候选组的 per-gene Z 值数据不在当前管道输出中。
-> 根据之前的分析摘要，候选组在 GTEx 中的 FDR 发现率为 **40.7%**（27 测试，11 FDR 显著）。
+> 根据已发布处理数据 (enrichment_comparison.csv)，候选组在 GTEx (DR) 中的 FDR 发现率为 **48.1%**（13/27 FDR 显著）。
+"""
 
 report += f"""
 ### 2.2 eQTLGen 三组富集率
