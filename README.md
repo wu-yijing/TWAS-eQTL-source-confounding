@@ -181,7 +181,7 @@ All GWAS and eQTL summary statistics used in this study are from **publicly avai
 | eQTLGen whole blood cis-eQTL | [eQTLGen](https://www.eqtlgen.org/) | Public access |
 | 1000 Genomes EUR LD | [1000 Genomes](https://www.internationalgenome.org/) | Public access |
 | UK Biobank DR (GCST90043640) | [IEU OpenGWAS](https://gwas.mrcieu.ac.uk/) | Public access |
-| UK Biobank DR (Xue et al. 2022) | [IEU OpenGWAS](https://gwas.mrcieu.ac.uk/) | Public access |
+| UK Biobank DR (Xue et al. 2022; ieu-b-4803, 14,147 cases/322,390 controls) | [IEU OpenGWAS](https://gwas.mrcieu.ac.uk/) | Public access |
 | Cai et al. 2026 UKB T2D-DR | (in preparation) | Apply to UKB |
 | Sakaue et al. 2021 DN (ebi-a-GCST90018832) | [IEU OpenGWAS](https://gwas.mrcieu.ac.uk/) | Public access |
 
