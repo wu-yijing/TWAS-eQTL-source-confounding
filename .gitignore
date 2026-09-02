@@ -51,6 +51,9 @@ scz_replication/gtex_v8_mashr_snp_covariance.txt.gz
 # ===== Confidential manuscript & cover letter (NOT tracked — keep local only) =====
 manuscript/
 
+# ===== Internal analysis reports (working notes, keep local only — not public) =====
+analysis_reports/*.docx
+
 # ===== Local backup / scratch files (not for repo) =====
 *_BACKUP_*.csv
 *_BACKUP_*.py
