@@ -19,19 +19,19 @@ Does the choice of eQTL weight source (GTEx v8 tissue-specific vs. eQTLGen large
 
 ### Key Findings
 
-> **Note (2026-08-09):** The table below reflects the **v2.0.0** analysis (current manuscript version). The original v1.0.0 (iScience submission) used a different analysis pipeline that produced different FDR rates and gene-level Z-scores; those earlier values have been superseded. FDR enrichment rates are phenotype-dependent and are shown for diabetic retinopathy (DR) as the representative phenotype; see `data/processed/enrichment_comparison.csv` for all phenotypes. The direction-consistency and FDR metrics are computed from small curated gene sets (n≈16–33 per group) and should be interpreted with appropriate caution regarding sampling variability.
+> **Note (2026-09-09, harmonized recompute):** The table below reflects the **current manuscript version (BMC Genomics submission)**, in which all eQTLGen-arm values were recomputed after **three-way allele harmonization** (eQTLGen assessed/other alleles ↔ FinnGen R13 ref/alt ↔ 1000G EUR A2) using the official eQTLGen FDR < 0.05 weight catalogue. This supersedes both the v1.0.0 (iScience) pipeline values and the earlier archived eQTLGen export, which contained an allele-alignment defect (24.1% of Z-scores flipped sign after harmonization). FDR enrichment rates are computed by Benjamini–Hochberg correction within each group × phenotype × source stratum; 41 of 144 genes lacked an eQTLGen model in the official FDR < 0.05 catalogue and are disclosed in the manuscript Methods. See `data/processed/eqtlgen_spredixcan_harmonized_results.csv` (gene-level Z-scores) and `data/processed/enrichment_comparison_harmonized.csv` (stratum-wise enrichment rates with Clopper–Pearson CIs).
 
 | Metric | Value | Notes |
 |--------|-------|-------|
 | Total genes analyzed | 104 (30 candidate + 44 non-candidate + 30 T2DM control) | 114 records in covariate matrix (includes variants) |
-| Spearman ρ (GTEx vs eQTLGen Z-scores) | 0.29 | 102 gene–phenotype pairs; binomial test P = 0.06 for direction consistency |
-| Direction consistency (all pairs) | 59.5% | Varies by phenotype (DR 61.8%, DN 58.8%, DPN 58.8%) |
-| Direction consistency (candidate genes only) | ~60% (varies by phenotype) | Ribosomal vs non-ribosomal genes: similar rates (~60%) |
+| Spearman ρ (GTEx WB vs harmonized eQTLGen Z-scores) | 0.32 (P = 0.001) | 96 gene–phenotype pairs from 32 genes (primary arm) |
+| Direction consistency (primary arm) | 63.5% (61/96) | Exact binomial P = 0.010 vs 50%; DR 65.6%, DN 65.6%, DPN 59.4% |
+| Direction consistency (candidate subset, GTEx NT vs eQTLGen) | 70.0% (42/60) | 20 genes; subset definitions shift estimates by ≤7 pp (manuscript Table 2c) |
 | GTEx FDR rate (candidate, DR) | 48.1% (13/27) | GTEx v8 MASHR, multi-tissue Stouffer integration |
-| eQTLGen FDR rate (candidate, DR) | 71.4% (20/28) | Higher than GTEx due to larger sample/SNP coverage |
-| RNH1 GTEx Z-score (DR, Nerve_Tibial) | +13.82 | S-PrediXcan; from sparse MASHR model (2 SNPs) |
-| RNH1 eQTLGen Z-score (DR) | +11.62 | Consistent signal across both eQTL sources |
-| Cross-population I² (RNH1, 3 cohorts) | 95.0% | Source-consistent but cross-population heterogeneous |
+| eQTLGen FDR rate (candidate, DR) | 41.7% (10/24) | Harmonized recompute; group rates 41.7–66.7% across phenotypes, comparable to non-candidate and T2DM controls |
+| RNH1 GTEx Z-score (DR, Nerve_Tibial) | +13.82 | S-PrediXcan; from sparse 3-SNP MASHR model |
+| RNH1 eQTLGen Z-score (DR) | +13.32 | Harmonized recompute; source-stable signal |
+| Cross-population heterogeneity (RNH1, DR; FinnGen R13 vs UK Biobank) | I² = 98.7% | Random-effects pooled Z = +7.13, 95% prediction interval −13.77 to +28.04 (spans zero) |
 | SCZ replication (n=2,511 pairs) | 68.3% direction consistency | Axis difference not significant (bootstrap P = 0.530) |
 
 ## SCZ 2×2 Decomposition Replication (added in v2.0.0)
@@ -133,7 +133,9 @@ TWAS-eQTL-source-confounding/
 │   ├── raw/                                          # (public data references only)
 │   └── processed/
 │       ├── eqtlgen_vs_gtex_comparison.csv            # GTEx vs eQTLGen Z-score pairs
-│       ├── eqtlgen_spredixcan_results.csv             # eQTLGen TWAS full results
+│       ├── eqtlgen_spredixcan_results.csv             # eQTLGen TWAS results (archived export; superseded — see harmonized file below)
+│       ├── eqtlgen_spredixcan_harmonized_results.csv  # eQTLGen TWAS results, three-way allele-harmonized recompute (current manuscript)
+│       ├── enrichment_comparison_harmonized.csv       # Stratum-wise enrichment rates (harmonized), Clopper–Pearson CIs
 │       ├── mahalanobis_matched_pairs.csv              # Mahalanobis matching pairs
 │       ├── matched_enrichment_results.csv             # Post-matching enrichment
 │       ├── enrichment_comparison.csv                  # Enrichment by group × phenotype × eQTL
