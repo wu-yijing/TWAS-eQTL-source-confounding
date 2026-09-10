@@ -126,13 +126,27 @@ TWAS-eQTL-source-confounding/
 │   │   ├── 05_generate_decision_framework.py         # Decision framework flowchart (Fig 6)
 │   │   ├── 06_generate_supplementary_figures.py      # Supplementary figures S5-S7
 │   │   ├── 07_generate_supplementary_tables.py       # Supplementary tables S4-S6
-│   │   └── 08_generate_tables_S1_S2.py               # Supplementary tables S1-S2
+│   │   ├── 08_generate_tables_S1_S2.py               # Supplementary tables S1-S2
+│   │   └── s1_cluster_robustness/                    # Gene-level cluster-robust re-analysis (S1)
+│   │       ├── s1_recon.py                           # Reconstruct analysis arms from raw tables
+│   │       ├── s1_diag.py                            # Diagnose NaN genes / cluster sizes
+│   │       ├── s1_fix.py                             # Confirm NaN genes, rebuild 96-pair arm
+│   │       ├── s1_cluster.py                         # ICC/DEFF, cluster-robust variance, bootstraps
+│   │       ├── s1_scz_cluster.py                     # Genome-wide SCZ arm re-analysis
+│   │       ├── s1_results.json                       # HOTAIR arms (machine-readable)
+│   │       ├── s1_scz_results.json                   # SCZ arm (machine-readable)
+│   │       ├── s1_primary_arm_96pairs.csv            # 96 primary-arm pairs (Z + direction)
+│   │       └── s1_anchor_102pairs.csv                # 102 anchor-set pairs
 │   └── R/
 │       └── (placeholder)                             # matchit R scripts
 ├── data/
 │   ├── raw/                                          # (public data references only)
 │   └── processed/
 │       ├── eqtlgen_vs_gtex_comparison.csv            # GTEx vs eQTLGen Z-score pairs
+│       │                                             #   ⚠️ DEPRECATED for direction-consistency analyses:
+│       │                                             #   predates the three-way allele harmonisation, so its
+│       │                                             #   Same_Direction column reflects pre-harmonisation Z.
+│       │                                             #   Use eqtlgen_spredixcan_harmonized_results.csv instead.
 │       ├── eqtlgen_spredixcan_results.csv             # eQTLGen TWAS results (archived export; superseded — see harmonized file below)
 │       ├── eqtlgen_spredixcan_harmonized_results.csv  # eQTLGen TWAS results, three-way allele-harmonized recompute (current manuscript)
 │       ├── enrichment_comparison_harmonized.csv       # Stratum-wise enrichment rates (harmonized), Clopper–Pearson CIs
@@ -171,6 +185,30 @@ scz_replication/
 Manuscript and cover letter: `manuscript/`. SCZ figures: `figures/scz/`.
 
 > Large intermediates (`weights.db`, extracted eQTLGen RDat weights, raw GWAS) are excluded by `.gitignore`; regenerate via the scripts above.
+
+## Cluster-Robustness Re-analysis of Direction Consistency (S1)
+
+The primary between-source comparison comprises 96 gene–phenotype pairs that derive from
+only **32 genes**, so a gene's three phenotypes (DR, DN, DPN) are not independent
+observations. The `scripts/python/s1_cluster_robustness/` folder quantifies this clustering
+and recomputes the direction-consistency test with three cluster-aware procedures.
+
+**Result: the intra-gene correlation is negligible (ICC = 0.000, design effect = 1.000).**
+The exact binomial test reported in the manuscript (P = 0.010) is therefore **not materially
+anti-conservative** — a cluster-robust sandwich test gives P = 0.013, a gene-level cluster
+bootstrap gives P = 0.017 (95% CI 53.1–74.0%), and a gene-label permutation test gives
+P = 0.008. All variants remain significant at α = 0.05, and the CI widens by only 0.9
+percentage points (53.1–74.0% vs 53.1–73.1%).
+
+For the genome-wide SCZ arm the complete-case set contributes **exactly one pair per gene**
+(2,511 pairs from 2,511 genes), so the design effect is 1 by construction and no cluster
+correction is required; the gene-resampling bootstrap coincides with the exact binomial test
+(68.26%, ρ = 0.522 for the resource/sample-size axis; 71.21%, ρ = 0.509 for the
+tissue-context axis).
+
+Seeds: `20260910` (HOTAIR arms) and `20260726` (SCZ arm), B = 10,000 each.
+Full methods, reproduction steps and a stale-file caveat are in
+`scripts/python/s1_cluster_robustness/README.md`.
 
 ## Data Sources
 
