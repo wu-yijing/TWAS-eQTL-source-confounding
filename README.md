@@ -1,17 +1,17 @@
 # TWAS eQTL Source Confounding — Systematic Evaluation
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21428347.svg)](https://doi.org/10.5281/zenodo.21428347)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21238202.svg)](https://doi.org/10.5281/zenodo.21238202)
 
 ## Overview
 
 This repository contains analysis scripts and processed data for:
 
-**"Quantifying eQTL source confounding in TWAS: A dual-source 2×2 decomposition framework and its implications for cross-population replication"**
+**"eQTL-source discordance in TWAS: a dual-source sensitivity analysis with true-negative calibration"**
 
-Status: code & data release accompanying the manuscript; target journal to be finalized at submission.
+Status: code & data release accompanying the manuscript (BMC Genomics submission).
 
-> The original v1.0.0 release (Zenodo [10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)) corresponded to the iScience submission titled *"eQTL source confounding systematically biases TWAS cross-population replication …"* (HOTAIR binding proteins, 104 genes, three diabetic complications). v2.0.0 adds the schizophrenia (SCZ) dual-source 2×2 decomposition replication and prepares the manuscript for journal submission.
+> The original v1.0.0 release (Zenodo [10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)) corresponded to the iScience submission titled *"eQTL source confounding systematically biases TWAS cross-population replication …"* (HOTAIR binding proteins, 104 genes, three diabetic complications). The archive now resolves through the concept DOI [10.5281/zenodo.21238202](https://doi.org/10.5281/zenodo.21238202), which always points to the latest version; the current version is v2.4.0 ([10.5281/zenodo.22691102](https://doi.org/10.5281/zenodo.22691102)), adding the gene-level cluster-robustness re-analysis (S1) on top of the SCZ dual-source decomposition replication.
 
 ### Core Question
 
@@ -255,13 +255,15 @@ python scripts/python/02_density_scatter_consistency.py
 
 ## Reproducibility
 
-All processed data tables are provided in `data/processed/` and `scz_replication/results/`. Analysis scripts are version-controlled in this repository under MIT license. The repository snapshot is archived at Zenodo: [https://doi.org/10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347). A new Zenodo version (v2.0.0, including the SCZ replication) is minted automatically when the corresponding GitHub Release is published.
+All processed data tables are provided in `data/processed/` and `scz_replication/results/`. Analysis scripts are version-controlled in this repository under MIT license. The repository snapshot is archived at Zenodo under the concept DOI [https://doi.org/10.5281/zenodo.21238202](https://doi.org/10.5281/zenodo.21238202), which always resolves to the latest version (current version v2.4.0, [10.5281/zenodo.22691102](https://doi.org/10.5281/zenodo.22691102)). The gene-level cluster-robustness re-analysis (S1) is archived both here (`scripts/python/s1_cluster_robustness/`) and in that Zenodo release as `s1_cluster_robustness.zip`.
+
+> ⚠️ `data/processed/eqtlgen_vs_gtex_comparison.csv` is **superseded for direction-consistency analyses**: it predates the three-way allele harmonisation, so its `Same_Direction` column reflects pre-harmonisation Z-scores. Use `data/processed/eqtlgen_spredixcan_harmonized_results.csv` instead.
 
 ## Citation
 
 Wu Y, Chen M, Wu Q, Zhao J, Jin G. (2026). TWAS eQTL Source Confounding — Systematic Evaluation (v1.0.0). Zenodo. [https://doi.org/10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)
 
-Wu Y, Chen M, Wu Q, Zhao J, Jin G. (2026). TWAS eQTL Source Confounding — Systematic Evaluation (v2.0.0, SCZ 2×2 decomposition replication). Zenodo. [https://doi.org/10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)
+Wu Y. (2026). eQTL-source discordance in TWAS: a dual-source sensitivity analysis with true-negative calibration (code & data) (v2.4.0). Zenodo. [https://doi.org/10.5281/zenodo.22691102](https://doi.org/10.5281/zenodo.22691102)
 
 ## License
 
