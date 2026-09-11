@@ -24,6 +24,22 @@ cat("[Mahalanobis] Loading covariate matrix...\n")
 covar <- read.csv(file.path(DATA_DIR, "covariate_matrix.csv"),
                   stringsAsFactors = FALSE)
 
+# =============================================================================
+# NOTE (2026-09-11): provenance of missing eQTL SNP counts
+# -----------------------------------------------------------------------------
+# The archived outputs (mahalanobis_matched_pairs.csv, Additional file 1
+# Table S4) were generated with group-median imputation of eQTL_SNPs_Mean for
+# genes with no significant cis-eQTL model in the corresponding weight-source
+# run: 3 of 30 candidates (HSPA8, RPS18, RPS25; median 1.5), 17 of 44 pool
+# genes (10 of which entered the matched control set; median 1.5), and 11 of
+# 30 T2DM control genes (median 1.0). The na.omit-style filtering in Section 2
+# below therefore does NOT reproduce those outputs as-is; it is retained to
+# document the complete-case sensitivity view. To reproduce the published
+# matched pairs, impute eQTL_SNPs_Mean with the median of observed values
+# within each Group (Candidate / Non-Candidate / T2DM Control) BEFORE the
+# filtering steps. See manuscript Methods 1.9 for the full disclosure.
+# =============================================================================
+
 # ---- 2. Prepare matching data ----
 # Select candidate genes (treated)
 candidate <- covar[covar$Group == "Candidate", ]
