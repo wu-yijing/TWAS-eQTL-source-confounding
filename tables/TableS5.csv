@@ -6,8 +6,10 @@ CKAP4,DN,UKB (direction consistent),+0.50,>0.05,Consistent,All UKB DR P>0.05
 HSP90AB1,DN,UKB (direction consistent),+0.45,>0.05,Consistent,All UKB DR P>0.05
 RPS14,DN,UKB (direction consistent),+0.38,>0.05,Consistent,All UKB DR P>0.05
 EEF2,DN,UKB (not significant),+0.20,>0.05,Consistent,All UKB DR P>0.05
-
-Meta-analysis,DR,FinnGen + 2 UKB,+3.37,7.4e-4,—,Fixed-effect meta-analysis
-Heterogeneity,DR,Cochran Q=40.0,I²=95.0%,<0.0001,—,Extreme heterogeneity
-Prediction Interval,DR,95% PI,"[-4.00, +10.68]",—,Crosses zero,Unreplicable in future cohorts
-Direction Consistency,DR,8 testable genes,87.5% (7/8),P=0.035,Binomial test,Nominal direction preservation
+,,,,,,
+Meta-analysis,DR,FinnGen + UKB ieu-b-4803 (k = 2),+7.13,0.25,—,"Random-effects pooled (unweighted mean, SE = 6.18); descriptive at k = 2"
+Heterogeneity,DR,Cochran Q = 76.5 (df = 1),I² = 98.7%,2.2e-18,—,"τ = 8.69; 95% PI [-13.77, +28.04] crosses zero"
+Sensitivity,DR,√N_e-weighted re-merge (k = 2),+10.28,8.9e-25,—,"Weighted Stouffer, weights √(N_e,i); Q = 72.7, I² = 98.6% (m6_ne_weighted_sensitivity.py)"
+Sensitivity,DR,"Three-study incl. GCST90043640 (k = 3, unweighted)",+4.95,—,—,"Q = 105.2, I² = 98.1%; mixes weight sources; completeness only"
+Sensitivity,DR,"Three-study incl. GCST90043640 (k = 3, √N_e-weighted)",+10.28,8.6e-25,—,"Q = 72.9, I² = 97.3%; mixes weight sources; completeness only"
+Direction Consistency,DR,8 testable genes,87.5% (7/8),P = 0.070,Two-sided exact binomial,"Group-level direction check (GTEx v8 MASHR weights, Table S5b)"

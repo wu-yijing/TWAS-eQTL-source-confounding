@@ -127,6 +127,7 @@ TWAS-eQTL-source-confounding/
 │   │   ├── 06_generate_supplementary_figures.py      # Supplementary figures S5-S7
 │   │   ├── 07_generate_supplementary_tables.py       # Supplementary tables S4-S6
 │   │   ├── 08_generate_tables_S1_S2.py               # Supplementary tables S1-S2
+│   │   ├── m6_ne_weighted_sensitivity.py             # M6(b)/M6(d): sqrt(N_e)-weighted RNH1 DR merge sensitivity
 │   │   └── s1_cluster_robustness/                    # Gene-level cluster-robust re-analysis (S1)
 │   │       ├── s1_recon.py                           # Reconstruct analysis arms from raw tables
 │   │       ├── s1_diag.py                            # Diagnose NaN genes / cluster sizes
@@ -255,7 +256,7 @@ python scripts/python/02_density_scatter_consistency.py
 
 ## Reproducibility
 
-All processed data tables are provided in `data/processed/` and `scz_replication/results/`. Analysis scripts are version-controlled in this repository under MIT license. The repository snapshot is archived at Zenodo under the concept DOI [https://doi.org/10.5281/zenodo.21238202](https://doi.org/10.5281/zenodo.21238202), which always resolves to the latest version (current version v2.4.0, [10.5281/zenodo.22691102](https://doi.org/10.5281/zenodo.22691102)). The gene-level cluster-robustness re-analysis (S1) is archived both here (`scripts/python/s1_cluster_robustness/`) and in that Zenodo release as `s1_cluster_robustness.zip`.
+All processed data tables are provided in `data/processed/` and `scz_replication/results/`. Analysis scripts are version-controlled in this repository under MIT license. The repository snapshot is archived at Zenodo under the concept DOI [https://doi.org/10.5281/zenodo.21238202](https://doi.org/10.5281/zenodo.21238202), which always resolves to the latest version (current version v2.4.0, [10.5281/zenodo.22691102](https://doi.org/10.5281/zenodo.22691102)). The gene-level cluster-robustness re-analysis (S1) is archived both here (`scripts/python/s1_cluster_robustness/`) and in that Zenodo release as `s1_cluster_robustness.zip`. The sqrt(N_e)-weighted sensitivity re-merge of the RNH1 DR cross-cohort meta-analysis (M6(b)) and the descriptive three-study merge re-including GCST90043640 (M6(d)) are reproducible via `scripts/python/m6_ne_weighted_sensitivity.py` (output: `data/processed/m6_ne_weighted_sensitivity_results.txt`); the per-gene eQTLGen BH-FDR values underlying the DR rows of Table 1 are provided in `data/processed/eqtlgen_DR_pergene_FDR.csv`.
 
 > ⚠️ `data/processed/eqtlgen_vs_gtex_comparison.csv` is **superseded for direction-consistency analyses**: it predates the three-way allele harmonisation, so its `Same_Direction` column reflects pre-harmonisation Z-scores. Use `data/processed/eqtlgen_spredixcan_harmonized_results.csv` instead.
 

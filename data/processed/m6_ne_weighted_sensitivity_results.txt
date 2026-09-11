@@ -1,0 +1,20 @@
+==============================================================================
+M6(b)  k=2 primary set, sqrt(N_e)-weighted re-merge
+  studies: Z=+13.318, N_e=59134; Z=+0.950, N_e=54209
+  N_e shares: 52.2%, 47.8%
+  [primary reference] unweighted mean Z = +7.13
+  [sqrt(N_e)-weighted] pooled Z = +10.28  (two-sided P = 9e-25)
+  [sqrt(N_e)-weighted] b-scale FE pooled b = 0.03052
+  [heterogeneity] Cochran Q = 72.7 (df=1), I^2 = 98.6%
+  [random effects] DL tau^2 = 0.00127 (b scale); pooled b = 0.0294 (SE 0.0253); test Z = 1.16, P = 0.245
+==============================================================================
+M6(d)  k=3 all-studies merge incl. GCST90043640
+  studies: Z=+13.318, N_e=59134; Z=+0.950, N_e=54209; Z=+0.570, N_e=1231
+  N_e shares: 51.6%, 47.3%, 1.1%
+  [primary reference] unweighted mean Z = +4.95
+  [sqrt(N_e)-weighted] pooled Z = +10.28  (two-sided P = 8.6e-25)
+  [sqrt(N_e)-weighted] b-scale FE pooled b = 0.03037
+  [heterogeneity] Cochran Q = 72.9 (df=2), I^2 = 97.3%
+  [random effects] DL tau^2 = 0.00121 (b scale); pooled b = 0.0264 (SE 0.0217); test Z = 1.21, P = 0.225
+==============================================================================
+REFERENCE  k=3 unweighted mean: Z = +4.95 ; Q = 105.2 (df=2) ; I^2 = 98.1%
