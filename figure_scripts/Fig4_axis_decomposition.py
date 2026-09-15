@@ -1,30 +1,35 @@
 # -*- coding: utf-8 -*-
-"""Fig. 4 — axis-resolved source-discordance decomposition, 49-gene common universe
+"""Fig. 4 - axis-resolved source-discordance decomposition, 49-gene common universe
 (147 gene-phenotype pairs; the same universe as the tissue-only arm of Table 3b).
 
 PROVENANCE OF EVERY PLOTTED VALUE  (read before reusing this script)
 --------------------------------------------------------------------------
-(a) Reproduced from source data and re-verified 2026-09-14:
-      panel-only  rho = 0.355   direction consistency = 67.3%
-      tissue-only rho = 0.422   direction consistency = 67.3%
-      dual-arm direction consistency = 59.2%  ; d(direction consistency) = -8.2 pp
-(b) Transcribed verbatim from the archived analysis record (2026-09-11 validation
-    snapshot, consistent with the manuscript) because they could NOT be recomputed
-    exactly from the archived inputs:
-      dual-arm rho = 0.287 with its 95% CI, and the delta-rho / delta-P values of panel (b).
+Every value in this figure is reproducible from the archived inputs. The dual-mismatch arm
+is the GTEx v8 multi-tissue STOUFFER WEIGHTED-Z estimate (data/processed/
+gtex_stouffer_integrated.csv, column Z_Multi) intersected with the harmonized eQTLGen
+whole-blood S-PrediXcan Z (data/processed/eqtlgen_spredixcan_harmonized_results.csv, column
+zscore). That estimate is signed by construction, so no sign is assigned anywhere in the arm.
 
-Why (b) is not recomputed here: ACAT-O combines two-sided tissue-level P-values and
-therefore carries no intrinsic direction. The sign convention used in the original run was
-not recorded in the archived code; it is now documented in Methods 2.4 (the sign is taken
-from the GTEx Whole_Blood Z-score of the same gene-phenotype pair). Applying that
-convention reproduces the direction-consistency figures exactly, but yields dual-arm
-rho = 0.364 rather than 0.287, and no combination of archived P-value sources tested with
-that sign convention reproduces 0.287. The manuscript reports the archived value and this
-figure plots it verbatim, so figure and text remain consistent; re-deriving the dual arm
-from raw inputs is an open item (see 出图脚本硬编码审计报告_20260914.md).
+  panel-only    rho = 0.355   direction consistency = 67.3%
+  tissue-only   rho = 0.422   direction consistency = 67.3%
+  dual-mismatch rho = 0.287   direction consistency = 59.2%
+  delta rho (dual - panel-only)  = -0.067, 95% CI [-0.196, +0.039], P = 0.252
+  delta rho (dual - tissue-only) = -0.135, 95% CI [-0.375, +0.081], P = 0.238
+  delta direction consistency    = -8.2 pp for both contrasts
 
-Before publishing a new version of this package, either (i) re-derive the dual arm and
-replace the literals, or (ii) keep this provenance block so the transcription is explicit.
+The full-pair arm definitions (63 / 57 / 50 genes and 189 / 171 / 150 gene-phenotype pairs)
+and the per-arm gene-set composition are tabulated in Additional file 1: Table S10.
+
+HISTORY - an earlier open item, now closed. A previous version of this block recorded that
+the dual-arm rho "could NOT be recomputed exactly from the archived inputs" and was
+transcribed from the analysis record, because the arm was assumed to be built on ACAT-O with
+the sign taken from the GTEx Whole_Blood Z-score. That assumption was wrong: ACAT-O is only
+the direction-free enrichment endpoint, and the dual arm uses the Stouffer Z_Multi estimate,
+which is signed by construction. With the correct estimator all six headline numbers
+reproduce exactly (re-verified 2026-09-15), and Methods 2.4 now states the estimator
+explicitly. verify_literals() below re-derives them at run time.
+
+verify_literals() is read-only: it never alters what is plotted.
 """
 import os
 import numpy as np
@@ -40,7 +45,7 @@ plt.rcParams['axes.linewidth'] = 0.8
 plt.rcParams['xtick.major.width'] = 0.8
 plt.rcParams['ytick.major.width'] = 0.8
 
-OUT = r'E:\workbuddy\BMC Genomics投稿资料\定稿图集_Fig1-8_20260914'
+OUT = os.environ.get('FIG4_OUT') or r'E:\workbuddy\BMC Genomics投稿资料\定稿图集_Fig1-8_20260914'
 os.makedirs(OUT, exist_ok=True)
 
 # ===== plotted values: see the PROVENANCE block in the module docstring =====
@@ -64,6 +69,65 @@ rho_hi = np.array([+0.039, +0.081])
 p_rho = np.array([0.252, 0.238])
 delta_dc = np.array([-8.2, -8.2])
 p_dc = np.array([0.018, 0.201])
+
+def verify_literals():
+    """Re-derive the six headline numbers from the archived inputs (read-only)."""
+    try:
+        import csv, math, os as _os
+        from scipy import stats
+    except Exception as exc:                              # pragma: no cover
+        print('[verify] skipped (missing dependency): %s' % exc)
+        return
+    dp = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))),
+                       'data', 'processed')
+
+    def _num(x):
+        try:
+            v = float(x)
+            return v if math.isfinite(v) else None
+        except Exception:
+            return None
+
+    def _load(name, gcol, tcol, zcol):
+        out = {}
+        with open(_os.path.join(dp, name), encoding='utf-8-sig') as fh:
+            for r in csv.DictReader(fh):
+                v = _num(r[zcol])
+                if v is not None:
+                    out.setdefault((r[gcol], r[tcol]), v)
+        return out
+
+    wb, nt = {}, {}
+    for t in ('DR', 'DN', 'DPN'):
+        wb.update(_load('gtex_Whole_Blood_%s.csv' % t, 'gene', 'trait', 'zscore'))
+        nt.update(_load('gtex_Nerve_Tibial_%s.csv' % t, 'gene', 'trait', 'zscore'))
+    zmu = _load('gtex_stouffer_integrated.csv', 'Gene', 'Trait', 'Z_Multi')
+    eq = _load('eqtlgen_spredixcan_harmonized_results.csv', 'gene', 'trait', 'zscore')
+
+    universe = sorted(set(wb) & set(nt) & set(zmu) & set(eq))
+    expected = {
+        'panel-only': ((wb, eq), 0.355, 67.3),
+        'tissue-only': ((wb, nt), 0.422, 67.3),
+        'dual-mismatch': ((zmu, eq), 0.287, 59.2),
+    }
+    print('[verify] common universe: %d genes / %d pairs' % (len({k[0] for k in universe}), len(universe)))
+    bad = []
+    for arm, ((a, b), rho_exp, cons_exp) in expected.items():
+        x = [a[k] for k in universe]
+        y = [b[k] for k in universe]
+        rho = float(stats.spearmanr(x, y).statistic)
+        cons = 100.0 * sum(1 for p, q in zip(x, y) if (p > 0) == (q > 0)) / len(universe)
+        ok = abs(round(rho, 3) - rho_exp) <= 0.001 and abs(round(cons, 1) - cons_exp) <= 0.05
+        print('  %-14s rho %.3f (expect %.3f) | consistency %.1f%% (expect %.1f%%)  %s'
+              % (arm, rho, rho_exp, cons, cons_exp, 'OK' if ok else 'MISMATCH'))
+        if not ok:
+            bad.append(arm)
+    print('[verify] ' + ('all plotted values reproduce from the archived inputs'
+                         if not bad else 'MISMATCH in: ' + ', '.join(bad)))
+
+
+verify_literals()
+
 
 C_PANEL, C_TISSUE, C_DUAL = '#1f77b4', '#d62728', '#9467bd'
 TXT = '#222222'

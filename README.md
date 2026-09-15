@@ -7,11 +7,11 @@
 
 This repository contains analysis scripts and processed data for:
 
-**"eQTL-source discordance in TWAS: a dual-source sensitivity analysis with true-negative calibration"**
+**"eQTL weight-source choice destabilizes TWAS gene prioritization: a dual-source sensitivity analysis in diabetic complications, calibrated with disease-agnostic controls"**
 
 Status: code & data release accompanying the manuscript (BMC Genomics submission).
 
-> The original v1.0.0 release (Zenodo [10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)) corresponded to the iScience submission titled *"eQTL source confounding systematically biases TWAS cross-population replication …"* (HOTAIR binding proteins, 104 genes, three diabetic complications). The archive now resolves through the concept DOI [10.5281/zenodo.21238202](https://doi.org/10.5281/zenodo.21238202), which always points to the latest version; the current version is v2.4.0 ([10.5281/zenodo.22691102](https://doi.org/10.5281/zenodo.22691102)), adding the gene-level cluster-robustness re-analysis (S1) on top of the SCZ dual-source decomposition replication.
+> The original v1.0.0 release (Zenodo [10.5281/zenodo.21428347](https://doi.org/10.5281/zenodo.21428347)) corresponded to the iScience submission titled *"eQTL source confounding systematically biases TWAS cross-population replication …"* (HOTAIR binding proteins, 104 genes, three diabetic complications). The archive now resolves through the concept DOI [10.5281/zenodo.21238202](https://doi.org/10.5281/zenodo.21238202), which always points to the latest version; the current version is v2.5.0 ([10.5281/zenodo.22752073](https://doi.org/10.5281/zenodo.22752073)), which adds the harmonized eQTLGen recompute (three-way allele harmonization), the Fig. S4 model-SNP-count panel on that recompute, and the resolved provenance of the dual-mismatch arm (GTEx multi-tissue Stouffer weighted-Z, not ACAT-O).
 
 ### Core Question
 
@@ -19,14 +19,14 @@ Does the choice of eQTL weight source (GTEx v8 tissue-specific vs. eQTLGen large
 
 ### Key Findings
 
-> **Note (2026-09-09, harmonized recompute):** The table below reflects the **current manuscript version (BMC Genomics submission)**, in which all eQTLGen-arm values were recomputed after **three-way allele harmonization** (eQTLGen assessed/other alleles ↔ FinnGen R13 ref/alt ↔ 1000G EUR A2) using the official eQTLGen FDR < 0.05 weight catalogue. This supersedes both the v1.0.0 (iScience) pipeline values and the earlier archived eQTLGen export, which contained an allele-alignment defect (24.1% of Z-scores flipped sign after harmonization). FDR enrichment rates are computed by Benjamini–Hochberg correction within each group × phenotype × source stratum; 41 of 144 genes lacked an eQTLGen model in the official FDR < 0.05 catalogue and are disclosed in the manuscript Methods. See `data/processed/eqtlgen_spredixcan_harmonized_results.csv` (gene-level Z-scores) and `data/processed/enrichment_comparison_harmonized.csv` (stratum-wise enrichment rates with Clopper–Pearson CIs).
+> **Note (2026-09-09, harmonized recompute):** The table below reflects the **current manuscript version (BMC Genomics submission)**, in which all eQTLGen-arm values were recomputed after **three-way allele harmonization** (eQTLGen assessed/other alleles ↔ FinnGen R13 ref/alt ↔ 1000G EUR A2) using the official eQTLGen FDR < 0.05 weight catalogue. This supersedes both the v1.0.0 (iScience) pipeline values and the earlier archived eQTLGen export, which contained an allele-alignment defect (24.1% of Z-scores flipped sign after harmonization). FDR enrichment rates are computed by Benjamini–Hochberg correction within each group × phenotype × source stratum; 37 of the 104 testbed genes have no eQTLGen model in the official FDR < 0.05 catalogue and are disclosed in the manuscript Methods; of the 67 that do, 61 return a valid S-PrediXcan statistic and form the eQTLGen arm (Additional file 1: Table S10). See `data/processed/eqtlgen_spredixcan_harmonized_results.csv` (gene-level Z-scores) and `data/processed/enrichment_comparison_harmonized.csv` (stratum-wise enrichment rates with Clopper–Pearson CIs).
 
 | Metric | Value | Notes |
 |--------|-------|-------|
-| Total genes analyzed | 104 (30 candidate + 44 non-candidate + 30 T2DM control) | 114 records in covariate matrix (includes variants) |
+| Total genes analyzed | 104 (30 candidate + 44 non-candidate + 30 T2DM control) | 104 records in covariate matrix (one row per gene) |
 | Spearman ρ (GTEx WB vs harmonized eQTLGen Z-scores) | 0.32 (P = 0.001) | 96 gene–phenotype pairs from 32 genes (primary arm) |
 | Direction consistency (primary arm) | 63.5% (61/96) | Exact binomial P = 0.010 vs 50%; DR 65.6%, DN 65.6%, DPN 59.4% |
-| Direction consistency (candidate subset, GTEx NT vs eQTLGen) | 70.0% (42/60) | 20 genes; subset definitions shift estimates by ≤7 pp (manuscript Table 2c) |
+| Direction consistency by gene-subset definition (manuscript Table 3c) | 62.7% (64/102) / 63.5% (61/96) / 69.9% (109/156) | both-source anchor set (34 genes) / primary arm (32 genes) / full testbed (52 genes); subset definitions shift estimates by ≤7 pp |
 | GTEx FDR rate (candidate, DR) | 48.1% (13/27) | GTEx v8 MASHR, multi-tissue Stouffer integration |
 | eQTLGen FDR rate (candidate, DR) | 41.7% (10/24) | Harmonized recompute; group rates 41.7–66.7% across phenotypes, comparable to non-candidate and T2DM controls |
 | RNH1 GTEx Z-score (DR, Nerve_Tibial) | +13.82 | S-PrediXcan; from sparse 3-SNP MASHR model |
